@@ -5,7 +5,13 @@ const users = {
     'admin': { password: 'password123', fullName: 'Administrator' },
     'john': { password: 'password123', fullName: 'John Smith' },
     'sarah': { password: 'password123', fullName: 'Sarah Johnson' },
-    'alex': { password: 'password123', fullName: 'Alex Rodriguez' }
+    'alex': { password: 'password123', fullName: 'Alex Rodriguez' },
+    // Sports Legends (including 2 famous Indian female sports persons)
+    'virat': { password: 'password123', fullName: 'Virat Kohli', profession: '🏏 Cricket Champion' },
+    'sindhu': { password: 'password123', fullName: 'P.V. Sindhu', profession: '🏸 Badminton Champion' },
+    'mary': { password: 'password123', fullName: 'Mary Kom', profession: '🥊 Boxing Legend' },
+    'dhoni': { password: 'password123', fullName: 'MS Dhoni', profession: '🏏 Cricket Captain' },
+    'neeraj': { password: 'password123', fullName: 'Neeraj Chopra', profession: '🥇 Olympic Javelin Champion' }
 };
 
 // Handle login form submission
@@ -22,12 +28,13 @@ function handleLogin(event) {
     // Validate credentials
     if (users[username] && users[username].password === password) {
         // Successful login
-        showDashboard(users[username].fullName);
+        showDashboard(users[username]);
         
         // Save login state
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('currentUser', username);
         localStorage.setItem('userFullName', users[username].fullName);
+        localStorage.setItem('userProfession', users[username].profession || '');
         localStorage.setItem('loginTime', Date.now());
     } else {
         // Invalid credentials
@@ -43,13 +50,15 @@ function handleLogin(event) {
 }
 
 // Show dashboard after successful login
-function showDashboard(fullName) {
+function showDashboard(userProfile) {
     const loginSection = document.getElementById('loginSection');
     const dashboardSection = document.getElementById('dashboardSection');
     const welcomeMessage = document.getElementById('welcomeMessage');
     
-    // Update welcome message
-    welcomeMessage.textContent = `Hello ${fullName}, Get Motivated!`;
+    // Update welcome message with profession if available
+    const fullName = typeof userProfile === 'string' ? userProfile : userProfile.fullName;
+    const profession = (userProfile && userProfile.profession) ? ` - ${userProfile.profession}` : '';
+    welcomeMessage.textContent = `Hello ${fullName}${profession}, Get Motivated!`;
     
     // Hide login form and show dashboard
     loginSection.style.opacity = '0';
@@ -145,9 +154,14 @@ function logout() {
 function checkLoginStatus() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const userFullName = localStorage.getItem('userFullName');
+    const userProfession = localStorage.getItem('userProfession');
     
     if (isLoggedIn === 'true' && userFullName) {
-        showDashboard(userFullName);
+        const userProfile = {
+            fullName: userFullName,
+            profession: userProfession || ''
+        };
+        showDashboard(userProfile);
     }
 }
 
