@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Quiz - Shahab's Motivations</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation Menu -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-heart"></i> Motivations</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="forms.html"><i class="fas fa-wpforms"></i> HTML Forms</a></li>
+                <li><a href="tabs.html"><i class="fas fa-folder"></i> Quotes Tabs</a></li>
+                <li><a href="sports.html" class="active"><i class="fas fa-basketball-ball"></i> Sports Quiz</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="navigation.html"><i class="fas fa-compass"></i> Multi-Nav</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Interactive Sports Quiz</h1>
+                <p>Discover your sports heroes and get motivated by their stories</p>
+            </header>
+
+            <div class="quote-container">
+                <blockquote>"Champions aren't made in gyms. Champions are made from something deep inside them: A desire, a dream, a vision."</blockquote>
+                <cite>- Muhammad Ali</cite>
+            </div>
+
+            <!-- Section 1: Sport Selection -->
+            <div class="section">
+                <h2><i class="fas fa-basketball-ball"></i> Which Sport Do You Like?</h2>
+                <div class="form-group">
+                    <select id="sportSelect" onchange="handleSportSelection()">
+                        <option value="">Choose your favorite sport</option>
+                        <option value="cricket">Cricket</option>
+                        <option value="football">Football</option>
+                        <option value="hockey">Hockey</option>
+                        <option value="chess">Chess</option>
+                        <option value="others">Others</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Section 2: Sports Person Selection (Hidden initially) -->
+            <div id="personSection" class="section hidden">
+                <h2><i class="fas fa-user-friends"></i> Choose Your Sports Hero</h2>
+                <div class="form-group">
+                    <select id="personSelect" onchange="handlePersonSelection()">
+                        <option value="">Select a sports person</option>
+                    </select>
+                </div>
+                <div id="othersMessage" class="hidden" style="padding: 20px; background: #fff3cd; border-radius: 10px; color: #856404; text-align: center;">
+                    <h3><i class="fas fa-clock"></i> Oops! Please wait, we will take care of you later.</h3>
+                    <p>We're working on adding more sports to our collection. Stay tuned!</p>
+                </div>
+            </div>
+
+            <!-- Section 3: Sports Person Details (Hidden initially) -->
+            <div id="detailsSection" class="section hidden">
+                <h2><i class="fas fa-info-circle"></i> Sports Hero Details</h2>
+                <div class="feature-card" style="text-align: left;">
+                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 20px; align-items: center;">
+                        <div>
+                            <img id="personImage" src="" alt="Sports Person" style="width: 100%; border-radius: 15px; max-width: 200px;">
+                        </div>
+                        <div>
+                            <h3 id="personName" style="color: #667eea; margin-bottom: 15px;"></h3>
+                            <div class="detail-item">
+                                <strong>Sports Name:</strong> <span id="sportsName"></span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Date of Birth:</strong> <span id="personDOB"></span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Location:</strong> <span id="personLocation"></span>
+                            </div>
+                            <div class="detail-item">
+                                <strong>Bio:</strong> <span id="personBio"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="motivation-card" style="margin-top: 20px;">
+                        <p id="personQuote"></p>
+                        <span id="personQuoteAuthor"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Motivational Section -->
+            <div class="section">
+                <h2>Sports Motivation Corner</h2>
+                <div class="motivation-cards">
+                    <div class="motivation-card">
+                        <p>"It's not whether you get knocked down; it's whether you get up."</p>
+                        <span>- Vince Lombardi</span>
+                    </div>
+                    <div class="motivation-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <p>"The only way to prove that you're a good sport is to lose."</p>
+                        <span>- Ernie Banks</span>
+                    </div>
+                    <div class="motivation-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <p>"You miss 100% of the shots you don't take."</p>
+                        <span>- Wayne Gretzky</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/sports.js"></script>
+</body>
+</html>

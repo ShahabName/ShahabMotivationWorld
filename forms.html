@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Forms - Shahab's Motivations</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation Menu -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-heart"></i> Motivations</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="forms.html" class="active"><i class="fas fa-wpforms"></i> HTML Forms</a></li>
+                <li><a href="tabs.html"><i class="fas fa-folder"></i> Quotes Tabs</a></li>
+                <li><a href="sports.html"><i class="fas fa-basketball-ball"></i> Sports Quiz</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="navigation.html"><i class="fas fa-compass"></i> Multi-Nav</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>HTML Form Elements Showcase</h1>
+                <p>Explore all HTML form elements with motivational examples</p>
+            </header>
+
+            <div class="form-container">
+                <div class="quote-container">
+                    <blockquote>"The way to get started is to quit talking and begin doing."</blockquote>
+                    <cite>- Walt Disney</cite>
+                </div>
+
+                <form id="demoForm" onsubmit="handleSubmit(event)">
+                    <!-- Text Input -->
+                    <div class="form-group">
+                        <label for="fullName">Full Name (Text Input):</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="form-group">
+                        <label for="email">Email (Email Input):</label>
+                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter password" required>
+                    </div>
+
+                    <!-- Number Input -->
+                    <div class="form-group">
+                        <label for="age">Age (Number Input):</label>
+                        <input type="number" id="age" name="age" min="1" max="120" placeholder="25">
+                    </div>
+
+                    <!-- Date Input -->
+                    <div class="form-group">
+                        <label for="birthDate">Birth Date:</label>
+                        <input type="date" id="birthDate" name="birthDate">
+                    </div>
+
+                    <!-- Time Input -->
+                    <div class="form-group">
+                        <label for="preferredTime">Preferred Motivation Time:</label>
+                        <input type="time" id="preferredTime" name="preferredTime">
+                    </div>
+
+                    <!-- URL Input -->
+                    <div class="form-group">
+                        <label for="website">Personal Website (URL):</label>
+                        <input type="url" id="website" name="website" placeholder="https://yourwebsite.com">
+                    </div>
+
+                    <!-- Tel Input -->
+                    <div class="form-group">
+                        <label for="phone">Phone Number:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1-234-567-8900">
+                    </div>
+
+                    <!-- Range Input -->
+                    <div class="form-group">
+                        <label for="motivation">Current Motivation Level (1-10):</label>
+                        <input type="range" id="motivation" name="motivation" min="1" max="10" value="7" oninput="updateMotivationValue(this.value)">
+                        <span id="motivationValue">7</span>
+                    </div>
+
+                    <!-- Color Input -->
+                    <div class="form-group">
+                        <label for="favoriteColor">Favorite Motivational Color:</label>
+                        <input type="color" id="favoriteColor" name="favoriteColor" value="#667eea">
+                    </div>
+
+                    <!-- File Input -->
+                    <div class="form-group">
+                        <label for="profilePic">Profile Picture:</label>
+                        <input type="file" id="profilePic" name="profilePic" accept="image/*">
+                    </div>
+
+                    <!-- Select Dropdown -->
+                    <div class="form-group">
+                        <label for="country">Country (Select Dropdown):</label>
+                        <select id="country" name="country" required>
+                            <option value="">Choose your country</option>
+                            <option value="us">United States</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="ca">Canada</option>
+                            <option value="au">Australia</option>
+                            <option value="in">India</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Multiple Select -->
+                    <div class="form-group">
+                        <label for="interests">Motivational Topics (Multiple Select):</label>
+                        <select id="interests" name="interests" multiple size="4">
+                            <option value="success">Success</option>
+                            <option value="leadership">Leadership</option>
+                            <option value="productivity">Productivity</option>
+                            <option value="mindfulness">Mindfulness</option>
+                            <option value="fitness">Fitness</option>
+                            <option value="career">Career</option>
+                        </select>
+                    </div>
+
+                    <!-- Radio Buttons -->
+                    <div class="form-group">
+                        <label>Preferred Quote Frequency (Radio Buttons):</label>
+                        <div>
+                            <input type="radio" id="daily" name="frequency" value="daily" checked>
+                            <label for="daily">Daily</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="weekly" name="frequency" value="weekly">
+                            <label for="weekly">Weekly</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="monthly" name="frequency" value="monthly">
+                            <label for="monthly">Monthly</label>
+                        </div>
+                    </div>
+
+                    <!-- Checkboxes -->
+                    <div class="form-group">
+                        <label>Newsletter Subscriptions (Checkboxes):</label>
+                        <div>
+                            <input type="checkbox" id="motivationTips" name="subscriptions" value="tips">
+                            <label for="motivationTips">Daily Motivation Tips</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="successStories" name="subscriptions" value="stories">
+                            <label for="successStories">Success Stories</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="weeklyDigest" name="subscriptions" value="digest">
+                            <label for="weeklyDigest">Weekly Digest</label>
+                        </div>
+                    </div>
+
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label for="goals">Your Goals (Textarea):</label>
+                        <textarea id="goals" name="goals" rows="4" placeholder="Describe your goals and dreams..."></textarea>
+                    </div>
+
+                    <!-- Hidden Input -->
+                    <input type="hidden" name="formSource" value="motivationWebsite">
+
+                    <!-- Submit and Reset Buttons -->
+                    <div class="form-group">
+                        <button type="submit" class="btn">Submit Form</button>
+                        <button type="reset" class="btn" style="background: linear-gradient(135deg, #f093fb, #f5576c); margin-left: 10px;">Reset Form</button>
+                    </div>
+                </form>
+
+                <div id="formResult" class="hidden" style="margin-top: 20px; padding: 20px; background: #d4edda; border-radius: 10px; color: #155724;">
+                    <h3>Form Submitted Successfully!</h3>
+                    <p>"Every accomplishment starts with the decision to try." - John F. Kennedy</p>
+                    <div id="submittedData"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/forms.js"></script>
+</body>
+</html>

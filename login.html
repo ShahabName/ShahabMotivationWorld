@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Shahab's Motivations</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation Menu -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-heart"></i> Motivations</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="forms.html"><i class="fas fa-wpforms"></i> HTML Forms</a></li>
+                <li><a href="tabs.html"><i class="fas fa-folder"></i> Quotes Tabs</a></li>
+                <li><a href="sports.html"><i class="fas fa-basketball-ball"></i> Sports Quiz</a></li>
+                <li><a href="login.html" class="active"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="navigation.html"><i class="fas fa-compass"></i> Multi-Nav</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Login Form -->
+            <div id="loginSection" class="form-container">
+                <header style="margin-bottom: 30px;">
+                    <h1><i class="fas fa-sign-in-alt"></i> Welcome Back!</h1>
+                    <p>Login to access your personalized motivation dashboard</p>
+                </header>
+
+                <div class="quote-container">
+                    <blockquote>"The login to success is preparation, hard work, and learning from failure."</blockquote>
+                    <cite>- Colin Powell</cite>
+                </div>
+
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="username"><i class="fas fa-user"></i> Username:</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        <small>Demo users: admin, john, sarah, alex</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        <small>Demo password for all users: password123</small>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </div>
+                </form>
+
+                <div id="loginError" class="hidden" style="margin-top: 20px; padding: 15px; background: #f8d7da; border-radius: 10px; color: #721c24; text-align: center;">
+                    <i class="fas fa-exclamation-triangle"></i> Invalid username or password. Please try again.
+                </div>
+            </div>
+
+            <!-- Dashboard (Hidden initially) -->
+            <div id="dashboardSection" class="dashboard hidden">
+                <header>
+                    <h1 id="welcomeMessage">Hello User, Get Motivated!</h1>
+                    <p>Your personal motivation center</p>
+                </header>
+
+                <div class="daily-quote-dashboard">
+                    <h3><i class="fas fa-quote-left"></i> Your Daily Motivation</h3>
+                    <div id="dailyQuoteText" class="tab-quote"></div>
+                    <div id="dailyQuoteAuthor" class="tab-author"></div>
+                    <button onclick="getNewDailyQuote()" class="quote-btn" style="margin-top: 15px;">
+                        <i class="fas fa-refresh"></i> New Quote
+                    </button>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0;">
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line" style="color: #28a745;"></i>
+                        <h3>Your Progress</h3>
+                        <p>Days logged in: <span id="daysCount">1</span></p>
+                        <p>Quotes viewed: <span id="quotesCount">1</span></p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-target" style="color: #dc3545;"></i>
+                        <h3>Today's Goal</h3>
+                        <p>Stay motivated and inspired!</p>
+                        <p>Read at least 3 motivational quotes</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-calendar" style="color: #007bff;"></i>
+                        <h3>Quick Access</h3>
+                        <a href="tabs.html" class="btn" style="margin: 5px;">View Quotes</a>
+                        <a href="sports.html" class="btn" style="margin: 5px;">Sports Quiz</a>
+                    </div>
+                </div>
+
+                <div class="motivation-section">
+                    <h2>Your Motivation Feed</h2>
+                    <div class="motivation-cards">
+                        <div class="motivation-card">
+                            <p>"Believe you can and you're halfway there."</p>
+                            <span>- Theodore Roosevelt</span>
+                        </div>
+                        <div class="motivation-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <p>"Success is not final, failure is not fatal: it is the courage to continue that counts."</p>
+                            <span>- Winston Churchill</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button onclick="logout()" class="btn" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/login.js"></script>
+    <script src="js/quotes.js"></script>
+</body>
+</html>

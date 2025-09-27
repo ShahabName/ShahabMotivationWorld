@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Navigation - Shahab's Motivations</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation Menu -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-heart"></i> Motivations</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="forms.html"><i class="fas fa-wpforms"></i> HTML Forms</a></li>
+                <li><a href="tabs.html"><i class="fas fa-folder"></i> Quotes Tabs</a></li>
+                <li><a href="sports.html"><i class="fas fa-basketball-ball"></i> Sports Quiz</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="navigation.html" class="active"><i class="fas fa-compass"></i> Multi-Nav</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Multi-Page Navigation Demo</h1>
+                <p>Navigate through 5 pages of inspiring quotes</p>
+            </header>
+
+            <div class="nav-pages">
+                <div class="page-nav">
+                    <button id="prevBtn" class="nav-btn" onclick="previousPage()" disabled>
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <span id="pageIndicator">Page 1 of 5</span>
+                    <button id="nextBtn" class="nav-btn" onclick="nextPage()">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Page 1 -->
+                <div id="page1" class="page-content">
+                    <h2>Success & Achievement</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box">
+                            <p>"The only impossible journey is the one you never begin."</p>
+                            <span>- Tony Robbins</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <p>"Success is not how high you have climbed, but how you make a positive difference to the world."</p>
+                            <span>- Roy T. Bennett</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 2 -->
+                <div id="page2" class="page-content hidden">
+                    <h2>Perseverance & Courage</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <p>"It does not matter how slowly you go as long as you do not stop."</p>
+                            <span>- Confucius</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <p>"You are never too old to set another goal or to dream a new dream."</p>
+                            <span>- C.S. Lewis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 3 -->
+                <div id="page3" class="page-content hidden">
+                    <h2>Dreams & Vision</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <p>"The future belongs to those who believe in the beauty of their dreams."</p>
+                            <span>- Eleanor Roosevelt</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                            <p>"All our dreams can come true, if we have the courage to pursue them."</p>
+                            <span>- Walt Disney</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 4 -->
+                <div id="page4" class="page-content hidden">
+                    <h2>Hard Work & Dedication</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                            <p>"There are no shortcuts to any place worth going."</p>
+                            <span>- Beverly Sills</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                            <p>"The only place where success comes before work is in the dictionary."</p>
+                            <span>- Vidal Sassoon</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 5 -->
+                <div id="page5" class="page-content hidden">
+                    <h2>Inspiration & Hope</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);">
+                            <p>"Keep your face always toward the sunshine—and shadows will fall behind you."</p>
+                            <span>- Walt Whitman</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
+                            <p>"The best time to plant a tree was 20 years ago. The second best time is now."</p>
+                            <span>- Chinese Proverb</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <div class="feature-card" style="display: inline-block;">
+                        <i class="fas fa-lightbulb" style="color: #ffc107;"></i>
+                        <h3>Page Progress</h3>
+                        <div id="progressBar" style="width: 100%; height: 10px; background: #eee; border-radius: 5px; overflow: hidden;">
+                            <div id="progress" style="width: 20%; height: 100%; background: linear-gradient(135deg, #667eea, #764ba2); transition: width 0.3s ease;"></div>
+                        </div>
+                        <p style="margin-top: 10px;">You've read <span id="pagesRead">2</span> quotes so far!</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/navigation.js"></script>
+</body>
+</html>

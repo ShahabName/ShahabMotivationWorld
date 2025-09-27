@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivational Quotes Tabs - Shahab's Motivations</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation Menu -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-heart"></i> Motivations</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="forms.html"><i class="fas fa-wpforms"></i> HTML Forms</a></li>
+                <li><a href="tabs.html" class="active"><i class="fas fa-folder"></i> Quotes Tabs</a></li>
+                <li><a href="sports.html"><i class="fas fa-basketball-ball"></i> Sports Quiz</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="navigation.html"><i class="fas fa-compass"></i> Multi-Nav</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Motivational Quotes Collection</h1>
+                <p>Discover inspiration through beautifully organized quote categories</p>
+            </header>
+
+            <div class="tabs-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="success">
+                        <i class="fas fa-trophy"></i> Success
+                    </button>
+                    <button class="tab-button" data-tab="leadership">
+                        <i class="fas fa-crown"></i> Leadership
+                    </button>
+                    <button class="tab-button" data-tab="dreams">
+                        <i class="fas fa-star"></i> Dreams
+                    </button>
+                </div>
+
+                <div id="success" class="tab-content active">
+                    <div class="tab-quote">
+                        "Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful."
+                    </div>
+                    <div class="tab-author">- Albert Schweitzer</div>
+                    <div style="margin-top: 30px;">
+                        <div class="motivation-card">
+                            <p>"Don't be afraid to give up the good to go for the great."</p>
+                            <span>- John D. Rockefeller</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div class="motivation-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <p>"The way to get started is to quit talking and begin doing."</p>
+                            <span>- Walt Disney</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="leadership" class="tab-content">
+                    <div class="tab-quote">
+                        "A leader is one who knows the way, goes the way, and shows the way."
+                    </div>
+                    <div class="tab-author">- John C. Maxwell</div>
+                    <div style="margin-top: 30px;">
+                        <div class="motivation-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <p>"The greatest leader is not necessarily the one who does the greatest things. He is the one that gets the people to do the greatest things."</p>
+                            <span>- Ronald Reagan</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div class="motivation-card" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <p>"Leadership is not about being in charge. It is about taking care of those in your charge."</p>
+                            <span>- Simon Sinek</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dreams" class="tab-content">
+                    <div class="tab-quote">
+                        "All our dreams can come true, if we have the courage to pursue them."
+                    </div>
+                    <div class="tab-author">- Walt Disney</div>
+                    <div style="margin-top: 30px;">
+                        <div class="motivation-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <p>"The future belongs to those who believe in the beauty of their dreams."</p>
+                            <span>- Eleanor Roosevelt</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div class="motivation-card" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                            <p>"A dream doesn't become reality through magic; it takes sweat, determination and hard work."</p>
+                            <span>- Colin Powell</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-container" style="margin-top: 30px;">
+                <h2>Share Your Favorite Quote</h2>
+                <form id="quoteForm">
+                    <div class="form-group">
+                        <label for="userQuote">Your Motivational Quote:</label>
+                        <textarea id="userQuote" name="userQuote" rows="3" placeholder="Share your favorite motivational quote..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="quoteAuthor">Author:</label>
+                        <input type="text" id="quoteAuthor" name="quoteAuthor" placeholder="Quote author">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn">Add to Collection</button>
+                    </div>
+                </form>
+                <div id="userQuotes" style="margin-top: 20px;"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/tabs.js"></script>
+</body>
+</html>

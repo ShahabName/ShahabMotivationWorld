@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Shahab's World of Motivations!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation Menu -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-heart"></i> Motivations</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="forms.html"><i class="fas fa-wpforms"></i> HTML Forms</a></li>
+                <li><a href="tabs.html"><i class="fas fa-folder"></i> Quotes Tabs</a></li>
+                <li><a href="sports.html"><i class="fas fa-basketball-ball"></i> Sports Quiz</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="navigation.html"><i class="fas fa-compass"></i> Multi-Nav</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Welcome to Shahab's World of Motivations!</h1>
+                <p>Discover inspiration, motivation, and positivity in every corner</p>
+            </header>
+
+            <section class="hero">
+                <div class="quote-container">
+                    <blockquote id="daily-quote">
+                        "The only way to do great work is to love what you do."
+                    </blockquote>
+                    <cite id="quote-author">- Steve Jobs</cite>
+                    <button onclick="getNewQuote()" class="quote-btn">
+                        <i class="fas fa-refresh"></i> New Quote
+                    </button>
+                </div>
+            </section>
+
+            <section class="features">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-wpforms"></i>
+                        <h3>HTML Forms</h3>
+                        <p>Explore all HTML form elements in one interactive page</p>
+                        <a href="forms.html" class="btn">Explore Forms</a>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-folder"></i>
+                        <h3>Quotes Tabs</h3>
+                        <p>Beautiful jQuery tabs with inspiring motivational quotes</p>
+                        <a href="tabs.html" class="btn">View Quotes</a>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-basketball-ball"></i>
+                        <h3>Sports Quiz</h3>
+                        <p>Interactive sports quiz with dynamic content reveals</p>
+                        <a href="sports.html" class="btn">Take Quiz</a>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-user"></i>
+                        <h3>Personal Dashboard</h3>
+                        <p>Login to access your personalized motivation center</p>
+                        <a href="login.html" class="btn">Sign In</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="motivation-section">
+                <h2>Today's Motivation</h2>
+                <div class="motivation-cards">
+                    <div class="motivation-card">
+                        <p>"Success is not final, failure is not fatal: it is the courage to continue that counts."</p>
+                        <span>- Winston Churchill</span>
+                    </div>
+                    <div class="motivation-card">
+                        <p>"The future belongs to those who believe in the beauty of their dreams."</p>
+                        <span>- Eleanor Roosevelt</span>
+                    </div>
+                    <div class="motivation-card">
+                        <p>"It is during our darkest moments that we must focus to see the light."</p>
+                        <span>- Aristotle</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/quotes.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
