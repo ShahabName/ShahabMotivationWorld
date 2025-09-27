@@ -1,7 +1,7 @@
 // Multi-navigation page JavaScript functionality
 
 let currentPage = 1;
-const totalPages = 5;
+const totalPages = 20;
 
 // Function to show specific page
 function showPage(pageNumber) {
@@ -77,10 +77,75 @@ function updateNavigationButtons() {
     }
 }
 
-// Update page indicator
+// Update page navigation links
 function updatePageIndicator() {
-    const indicator = document.getElementById('pageIndicator');
-    indicator.textContent = `Page ${currentPage} of ${totalPages}`;
+    const pageNavigation = document.getElementById('pageNavigation');
+    pageNavigation.innerHTML = '';
+    
+    // Calculate which pages to show
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, currentPage + 2);
+    
+    // Adjust if we're near the beginning or end
+    if (currentPage <= 3) {
+        startPage = 1;
+        endPage = Math.min(5, totalPages);
+    } else if (currentPage >= totalPages - 2) {
+        startPage = Math.max(1, totalPages - 4);
+        endPage = totalPages;
+    }
+    
+    // Add first page and ellipsis if needed
+    if (startPage > 1) {
+        pageNavigation.appendChild(createPageLink(1));
+        if (startPage > 2) {
+            pageNavigation.appendChild(createEllipsis());
+        }
+    }
+    
+    // Add the range of pages around current page
+    for (let i = startPage; i <= endPage; i++) {
+        pageNavigation.appendChild(createPageLink(i));
+    }
+    
+    // Add ellipsis and last page if needed
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            pageNavigation.appendChild(createEllipsis());
+        }
+        pageNavigation.appendChild(createPageLink(totalPages));
+    }
+}
+
+// Create a page link element
+function createPageLink(pageNumber) {
+    const link = document.createElement('a');
+    link.href = '#';
+    link.className = 'page-link';
+    link.textContent = pageNumber;
+    
+    if (pageNumber === currentPage) {
+        link.classList.add('current');
+    }
+    
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (pageNumber !== currentPage) {
+            currentPage = pageNumber;
+            showPage(currentPage);
+            saveProgress(); // Save progress when jumping to a page
+        }
+    });
+    
+    return link;
+}
+
+// Create ellipsis element
+function createEllipsis() {
+    const ellipsis = document.createElement('span');
+    ellipsis.className = 'ellipsis';
+    ellipsis.textContent = '...';
+    return ellipsis;
 }
 
 // Update progress bar

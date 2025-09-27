@@ -29,7 +29,7 @@
         <main class="main-content">
             <header>
                 <h1>Multi-Page Navigation Demo</h1>
-                <p>Navigate through 5 pages of inspiring quotes</p>
+                <p>Navigate through 20 pages of inspiring quotes</p>
             </header>
 
             <div class="nav-pages">
@@ -37,7 +37,9 @@
                     <button id="prevBtn" class="nav-btn" onclick="previousPage()" disabled>
                         <i class="fas fa-chevron-left"></i> Previous
                     </button>
-                    <span id="pageIndicator">Page 1 of 5</span>
+                    <div id="pageNavigation" class="page-navigation">
+                        <!-- Dynamic page links will be generated here -->
+                    </div>
                     <button id="nextBtn" class="nav-btn" onclick="nextPage()">
                         Next <i class="fas fa-chevron-right"></i>
                     </button>
@@ -118,6 +120,231 @@
                     </div>
                 </div>
 
+                <!-- Page 6 -->
+                <div id="page6" class="page-content hidden">
+                    <h2>Leadership & Influence</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);">
+                            <p>"A leader is one who knows the way, goes the way, and shows the way."</p>
+                            <span>- John C. Maxwell</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);">
+                            <p>"The greatest leader is not necessarily the one who does the greatest things."</p>
+                            <span>- Ronald Reagan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 7 -->
+                <div id="page7" class="page-content hidden">
+                    <h2>Growth & Learning</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #96fbc4 0%, #f9f586 100%);">
+                            <p>"Live as if you were to die tomorrow. Learn as if you were to live forever."</p>
+                            <span>- Mahatma Gandhi</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ff9a8b 0%, #ad5389 100%);">
+                            <p>"The more that you read, the more things you will know."</p>
+                            <span>- Dr. Seuss</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 8 -->
+                <div id="page8" class="page-content hidden">
+                    <h2>Creativity & Innovation</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                            <p>"Creativity is intelligence having fun."</p>
+                            <span>- Albert Einstein</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <p>"Innovation distinguishes between a leader and a follower."</p>
+                            <span>- Steve Jobs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 9 -->
+                <div id="page9" class="page-content hidden">
+                    <h2>Mindfulness & Peace</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <p>"Peace comes from within. Do not seek it without."</p>
+                            <span>- Buddha</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                            <p>"The present moment is the only time over which we have dominion."</p>
+                            <span>- Thich Nhat Hanh</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 10 -->
+                <div id="page10" class="page-content hidden">
+                    <h2>Courage & Bravery</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <p>"Courage is not the absence of fear, but action in spite of it."</p>
+                            <span>- Mark Twain</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <p>"You have power over your mind - not outside events."</p>
+                            <span>- Marcus Aurelius</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 11 -->
+                <div id="page11" class="page-content hidden">
+                    <h2>Gratitude & Appreciation</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                            <p>"Gratitude makes sense of our past, brings peace for today, and creates vision for tomorrow."</p>
+                            <span>- Melody Beattie</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);">
+                            <p>"Be thankful for what you have; you'll end up having more."</p>
+                            <span>- Oprah Winfrey</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 12 -->
+                <div id="page12" class="page-content hidden">
+                    <h2>Passion & Purpose</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);">
+                            <p>"The two most important days in your life are the day you are born and the day you find out why."</p>
+                            <span>- Mark Twain</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);">
+                            <p>"Passion is energy. Feel the power that comes from focusing on what excites you."</p>
+                            <span>- Oprah Winfrey</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 13 -->
+                <div id="page13" class="page-content hidden">
+                    <h2>Resilience & Strength</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #96fbc4 0%, #f9f586 100%);">
+                            <p>"Fall seven times, stand up eight."</p>
+                            <span>- Japanese Proverb</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ff9a8b 0%, #ad5389 100%);">
+                            <p>"Strength does not come from physical capacity. It comes from an indomitable will."</p>
+                            <span>- Mahatma Gandhi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 14 -->
+                <div id="page14" class="page-content hidden">
+                    <h2>Excellence & Quality</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <p>"Excellence is never an accident. It is always the result of high intention."</p>
+                            <span>- Aristotle</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <p>"Quality is not an act, it is a habit."</p>
+                            <span>- Aristotle</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 15 -->
+                <div id="page15" class="page-content hidden">
+                    <h2>Focus & Discipline</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <p>"Discipline is the bridge between goals and accomplishment."</p>
+                            <span>- Jim Rohn</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <p>"The successful warrior is the average man with laser-like focus."</p>
+                            <span>- Bruce Lee</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 16 -->
+                <div id="page16" class="page-content hidden">
+                    <h2>Wisdom & Knowledge</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                            <p>"The only true wisdom is in knowing you know nothing."</p>
+                            <span>- Socrates</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                            <p>"Knowledge is power. Information is liberating."</p>
+                            <span>- Kofi Annan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 17 -->
+                <div id="page17" class="page-content hidden">
+                    <h2>Adventure & Exploration</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);">
+                            <p>"Adventure is not outside man; it is within."</p>
+                            <span>- George Eliot</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);">
+                            <p>"Life is either a daring adventure or nothing at all."</p>
+                            <span>- Helen Keller</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 18 -->
+                <div id="page18" class="page-content hidden">
+                    <h2>Kindness & Compassion</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);">
+                            <p>"No act of kindness, no matter how small, is ever wasted."</p>
+                            <span>- Aesop</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #96fbc4 0%, #f9f586 100%);">
+                            <p>"Compassion is not weakness, and concern for the unfortunate is not socialism."</p>
+                            <span>- Hubert H. Humphrey</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 19 -->
+                <div id="page19" class="page-content hidden">
+                    <h2>Change & Transformation</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #ff9a8b 0%, #ad5389 100%);">
+                            <p>"Be yourself; everyone else is already taken."</p>
+                            <span>- Oscar Wilde</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <p>"Change is the end result of all true learning."</p>
+                            <span>- Leo Buscaglia</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page 20 -->
+                <div id="page20" class="page-content hidden">
+                    <h2>Legacy & Impact</h2>
+                    <div class="quote-pair">
+                        <div class="quote-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <p>"The meaning of life is to find your gift. The purpose of life is to give it away."</p>
+                            <span>- Pablo Picasso</span>
+                        </div>
+                        <div class="quote-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <p>"We make a living by what we get, but we make a life by what we give."</p>
+                            <span>- Winston Churchill</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div style="text-align: center; margin-top: 30px;">
                     <div class="feature-card" style="display: inline-block;">
                         <i class="fas fa-lightbulb" style="color: #ffc107;"></i>
@@ -125,12 +352,79 @@
                         <div id="progressBar" style="width: 100%; height: 10px; background: #eee; border-radius: 5px; overflow: hidden;">
                             <div id="progress" style="width: 20%; height: 100%; background: linear-gradient(135deg, #667eea, #764ba2); transition: width 0.3s ease;"></div>
                         </div>
-                        <p style="margin-top: 10px;">You've read <span id="pagesRead">2</span> quotes so far!</p>
+                        <p style="margin-top: 10px;">You've read <span id="pagesRead">2</span> quotes so far! (40 total)</p>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <style>
+        .page-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 20px;
+        }
+
+        .page-link {
+            display: inline-block;
+            padding: 8px 12px;
+            text-decoration: none;
+            color: #667eea;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .page-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .page-link.current {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-color: #667eea;
+            transform: scale(1.1);
+        }
+
+        .page-link.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .ellipsis {
+            padding: 8px 4px;
+            color: #999;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .page-navigation {
+                flex-wrap: wrap;
+                gap: 4px;
+                margin: 0 10px;
+            }
+            
+            .page-link {
+                padding: 6px 8px;
+                font-size: 0.9em;
+                min-width: 32px;
+            }
+            
+            .page-link.current {
+                font-size: 1.1em;
+            }
+        }
+    </style>
 
     <script src="js/navigation.js"></script>
 </body>
