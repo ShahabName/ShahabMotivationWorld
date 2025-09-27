@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Forms Code Reference - Shahab's Motivations</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation Menu -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-heart"></i> Motivations</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="forms.html"><i class="fas fa-wpforms"></i> HTML Forms</a></li>
+                <li><a href="forms-detailed.html" class="active"><i class="fas fa-code"></i> Forms Code</a></li>
+                <li><a href="tabs.html"><i class="fas fa-folder"></i> Quotes Tabs</a></li>
+                <li><a href="sports.html"><i class="fas fa-basketball-ball"></i> Sports Quiz</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="navigation.html"><i class="fas fa-compass"></i> Multi-Nav</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>HTML Forms Code Reference</h1>
+                <p>Interactive form elements with their corresponding HTML source code</p>
+            </header>
+
+            <div class="quote-container">
+                <blockquote>"Code is like humor. When you have to explain it, it's bad."</blockquote>
+                <cite>- Cory House</cite>
+            </div>
+
+            <!-- Text Input -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-keyboard"></i> Text Input</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="textDemo">Full Name:</label>
+                            <input type="text" id="textDemo" placeholder="Enter your name" value="John Doe">
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="textDemo"&gt;Full Name:&lt;/label&gt;
+    &lt;input type="text" 
+           id="textDemo" 
+           placeholder="Enter your name"
+           value="John Doe"&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Input -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-envelope"></i> Email Input</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="emailDemo">Email Address:</label>
+                            <input type="email" id="emailDemo" placeholder="your@email.com" value="john@example.com">
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="emailDemo"&gt;Email Address:&lt;/label&gt;
+    &lt;input type="email" 
+           id="emailDemo" 
+           placeholder="your@email.com"
+           value="john@example.com"&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-lock"></i> Password Input</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="passwordDemo">Password:</label>
+                            <input type="password" id="passwordDemo" placeholder="Enter password" value="secretpass">
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="passwordDemo"&gt;Password:&lt;/label&gt;
+    &lt;input type="password" 
+           id="passwordDemo" 
+           placeholder="Enter password"&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Number Input -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-hashtag"></i> Number Input</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="numberDemo">Age:</label>
+                            <input type="number" id="numberDemo" min="1" max="120" value="25">
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="numberDemo"&gt;Age:&lt;/label&gt;
+    &lt;input type="number" 
+           id="numberDemo" 
+           min="1" 
+           max="120" 
+           value="25"&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Range Input -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-sliders-h"></i> Range Input</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="rangeDemo">Motivation Level (1-10):</label>
+                            <input type="range" id="rangeDemo" min="1" max="10" value="7">
+                            <span>7</span>
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="rangeDemo"&gt;Motivation Level (1-10):&lt;/label&gt;
+    &lt;input type="range" 
+           id="rangeDemo" 
+           min="1" 
+           max="10" 
+           value="7"&gt;
+    &lt;span&gt;7&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date Input -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-calendar"></i> Date Input</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="dateDemo">Birth Date:</label>
+                            <input type="date" id="dateDemo" value="1990-01-15">
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="dateDemo"&gt;Birth Date:&lt;/label&gt;
+    &lt;input type="date" 
+           id="dateDemo" 
+           value="1990-01-15"&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Time Input -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-clock"></i> Time Input</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="timeDemo">Preferred Time:</label>
+                            <input type="time" id="timeDemo" value="09:30">
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="timeDemo"&gt;Preferred Time:&lt;/label&gt;
+    &lt;input type="time" 
+           id="timeDemo" 
+           value="09:30"&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Input -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-palette"></i> Color Input</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="colorDemo">Favorite Color:</label>
+                            <input type="color" id="colorDemo" value="#667eea">
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="colorDemo"&gt;Favorite Color:&lt;/label&gt;
+    &lt;input type="color" 
+           id="colorDemo" 
+           value="#667eea"&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- File Input -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-file-upload"></i> File Input</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="fileDemo">Upload File:</label>
+                            <input type="file" id="fileDemo" accept="image/*">
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="fileDemo"&gt;Upload File:&lt;/label&gt;
+    &lt;input type="file" 
+           id="fileDemo" 
+           accept="image/*"&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Select Dropdown -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-list"></i> Select Dropdown</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="selectDemo">Country:</label>
+                            <select id="selectDemo">
+                                <option value="">Choose country</option>
+                                <option value="us" selected>United States</option>
+                                <option value="uk">United Kingdom</option>
+                                <option value="ca">Canada</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="selectDemo"&gt;Country:&lt;/label&gt;
+    &lt;select id="selectDemo"&gt;
+        &lt;option value=""&gt;Choose country&lt;/option&gt;
+        &lt;option value="us" selected&gt;United States&lt;/option&gt;
+        &lt;option value="uk"&gt;United Kingdom&lt;/option&gt;
+        &lt;option value="ca"&gt;Canada&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multiple Select -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-tasks"></i> Multiple Select</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="multiSelectDemo">Interests:</label>
+                            <select id="multiSelectDemo" multiple size="4">
+                                <option value="success" selected>Success</option>
+                                <option value="leadership">Leadership</option>
+                                <option value="productivity" selected>Productivity</option>
+                                <option value="mindfulness">Mindfulness</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="multiSelectDemo"&gt;Interests:&lt;/label&gt;
+    &lt;select id="multiSelectDemo" multiple size="4"&gt;
+        &lt;option value="success" selected&gt;Success&lt;/option&gt;
+        &lt;option value="leadership"&gt;Leadership&lt;/option&gt;
+        &lt;option value="productivity" selected&gt;Productivity&lt;/option&gt;
+        &lt;option value="mindfulness"&gt;Mindfulness&lt;/option&gt;
+    &lt;/select&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Radio Buttons -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-dot-circle"></i> Radio Buttons</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label>Frequency:</label>
+                            <div class="radio-group">
+                                <input type="radio" id="daily" name="frequency" value="daily" checked>
+                                <label for="daily">Daily</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="weekly" name="frequency" value="weekly">
+                                <label for="weekly">Weekly</label>
+                            </div>
+                            <div class="radio-group">
+                                <input type="radio" id="monthly" name="frequency" value="monthly">
+                                <label for="monthly">Monthly</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label&gt;Frequency:&lt;/label&gt;
+    &lt;div&gt;
+        &lt;input type="radio" id="daily" 
+               name="frequency" value="daily" checked&gt;
+        &lt;label for="daily"&gt;Daily&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type="radio" id="weekly" 
+               name="frequency" value="weekly"&gt;
+        &lt;label for="weekly"&gt;Weekly&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type="radio" id="monthly" 
+               name="frequency" value="monthly"&gt;
+        &lt;label for="monthly"&gt;Monthly&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-check-square"></i> Checkboxes</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label>Subscriptions:</label>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="tips" checked>
+                                <label for="tips">Daily Tips</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="stories">
+                                <label for="stories">Success Stories</label>
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="digest" checked>
+                                <label for="digest">Weekly Digest</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label&gt;Subscriptions:&lt;/label&gt;
+    &lt;div&gt;
+        &lt;input type="checkbox" id="tips" checked&gt;
+        &lt;label for="tips"&gt;Daily Tips&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type="checkbox" id="stories"&gt;
+        &lt;label for="stories"&gt;Success Stories&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;input type="checkbox" id="digest" checked&gt;
+        &lt;label for="digest"&gt;Weekly Digest&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Textarea -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-align-left"></i> Textarea</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <label for="textareaDemo">Comments:</label>
+                            <textarea id="textareaDemo" rows="4" placeholder="Enter your thoughts...">This is a sample text in the textarea element.</textarea>
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;div class="form-group"&gt;
+    &lt;label for="textareaDemo"&gt;Comments:&lt;/label&gt;
+    &lt;textarea id="textareaDemo" 
+              rows="4" 
+              placeholder="Enter your thoughts..."&gt;
+        This is sample text
+    &lt;/textarea&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-mouse-pointer"></i> Buttons</h2>
+                <div class="form-demo-grid">
+                    <div class="demo-column">
+                        <div class="form-group">
+                            <button type="submit" class="btn">Submit</button>
+                            <button type="reset" class="btn" style="background: linear-gradient(135deg, #f093fb, #f5576c); margin-left: 10px;">Reset</button>
+                            <button type="button" class="btn" style="background: linear-gradient(135deg, #4facfe, #00f2fe); margin-left: 10px;">Custom</button>
+                        </div>
+                    </div>
+                    <div class="code-column">
+                        <pre><code class="language-html">&lt;button type="submit" class="btn"&gt;Submit&lt;/button&gt;
+&lt;button type="reset" class="btn"&gt;Reset&lt;/button&gt;
+&lt;button type="button" class="btn"&gt;Custom&lt;/button&gt;
+
+&lt;!-- Input buttons alternative --&gt;
+&lt;input type="submit" value="Submit" class="btn"&gt;
+&lt;input type="reset" value="Reset" class="btn"&gt;</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete Form Example -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-clipboard-list"></i> Complete Form Structure</h2>
+                <div class="code-column full-width">
+                    <pre><code class="language-html">&lt;form id="myForm" action="/submit" method="POST" enctype="multipart/form-data"&gt;
+    &lt;!-- Form fields go here --&gt;
+    
+    &lt;div class="form-group"&gt;
+        &lt;label for="username"&gt;Username:&lt;/label&gt;
+        &lt;input type="text" 
+               id="username" 
+               name="username" 
+               required 
+               minlength="3" 
+               maxlength="20"
+               pattern="[a-zA-Z0-9]+"
+               placeholder="Enter username"&gt;
+    &lt;/div&gt;
+    
+    &lt;!-- Hidden field --&gt;
+    &lt;input type="hidden" name="formId" value="userRegistration"&gt;
+    
+    &lt;!-- Submit button --&gt;
+    &lt;button type="submit"&gt;Register&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+            </div>
+
+            <!-- Validation Attributes -->
+            <div class="form-demo-section">
+                <h2><i class="fas fa-shield-alt"></i> HTML5 Validation Attributes</h2>
+                <div class="code-column full-width">
+                    <pre><code class="language-html">&lt;!-- Required field --&gt;
+&lt;input type="text" required&gt;
+
+&lt;!-- Length constraints --&gt;
+&lt;input type="text" minlength="3" maxlength="20"&gt;
+
+&lt;!-- Number constraints --&gt;
+&lt;input type="number" min="18" max="99" step="1"&gt;
+
+&lt;!-- Pattern matching (regex) --&gt;
+&lt;input type="text" pattern="[A-Za-z]{3,}"&gt;
+
+&lt;!-- Custom validation message --&gt;
+&lt;input type="email" 
+       required 
+       title="Please enter a valid email address"&gt;</code></pre>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <style>
+        .form-demo-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-demo-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .form-demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .demo-column {
+            padding: 20px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .code-column {
+            background: #2d3748;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .code-column pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+        }
+
+        .code-column code {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .radio-group input, .checkbox-group input {
+            width: auto;
+            margin-right: 8px;
+        }
+
+        .radio-group label, .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-demo-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .code-column pre {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Syntax highlighting for better readability */
+        .token.tag {
+            color: #e06c75;
+        }
+        
+        .token.attr-name {
+            color: #d19a66;
+        }
+        
+        .token.attr-value {
+            color: #98c379;
+        }
+        
+        .token.punctuation {
+            color: #abb2bf;
+        }
+    </style>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
