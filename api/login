@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "data": {
+    "user": {
+      "id": "user_001",
+      "username": "demo_user",
+      "email": "demo@shahabworld.com",
+      "role": "member"
+    },
+    "sessionToken": "session_1738261234567_xyz789abc",
+    "expires": "2025-01-30T18:00:00Z"
+  },
+  "message": "Login successful",
+  "timestamp": "2025-01-29T12:00:00Z"
+}

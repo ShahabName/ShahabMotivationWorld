@@ -1,0 +1,39 @@
+{
+  "success": true,
+  "data": {
+    "quotes": [
+      {
+        "id": "quote_001",
+        "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+        "author": "Winston Churchill"
+      },
+      {
+        "id": "quote_002", 
+        "text": "The only way to do great work is to love what you do.",
+        "author": "Steve Jobs"
+      },
+      {
+        "id": "quote_003",
+        "text": "Innovation distinguishes between a leader and a follower.", 
+        "author": "Steve Jobs"
+      },
+      {
+        "id": "quote_004",
+        "text": "Believe you can and you're halfway there.",
+        "author": "Theodore Roosevelt"
+      },
+      {
+        "id": "quote_005",
+        "text": "The future belongs to those who believe in the beauty of their dreams.",
+        "author": "Eleanor Roosevelt"
+      }
+    ],
+    "pagination": {
+      "total": 5,
+      "page": 1,
+      "limit": 10
+    }
+  },
+  "message": "Quotes retrieved successfully",
+  "timestamp": "2025-01-29T12:00:00Z"
+}

@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "data": {
+    "id": "quote_001",
+    "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+    "author": "Winston Churchill",
+    "category": "motivation"
+  },
+  "message": "Random quote retrieved successfully",
+  "timestamp": "2025-01-29T12:00:00Z"
+}
