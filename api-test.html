@@ -343,11 +343,11 @@
         // Global variables for tokens
         let authToken = null;
         let sessionToken = null;
-        const API_BASE = '/api';
+        const API_BASE = '/ShahabMotivationWorld/api';
 
         // Register service worker
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
+            navigator.serviceWorker.register('/ShahabMotivationWorld/sw.js')
                 .then(registration => {
                     console.log('Service Worker registered:', registration);
                     // Wait a moment then check API status
