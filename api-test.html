@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Testing - ShahabMotivationWorld</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        
+        .test-section h2 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background: #45a049;
+        }
+        
+        .btn.error {
+            background: #f44336;
+        }
+        
+        .btn.error:hover {
+            background: #da190b;
+        }
+        
+        .btn.warning {
+            background: #ff9800;
+        }
+        
+        .btn.warning:hover {
+            background: #f57c00;
+        }
+        
+        .output {
+            background: #1e1e1e;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            margin-top: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-online {
+            background-color: #4CAF50;
+        }
+        
+        .status-offline {
+            background-color: #f44336;
+        }
+        
+        .tokens {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196F3;
+        }
+        
+        .tokens h3 {
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+        
+        .token-display {
+            background: white;
+            padding: 10px;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            word-break: break-all;
+            margin-bottom: 5px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Mock API Testing Interface</h1>
+            <p>Service Worker API for ShahabMotivationWorld</p>
+            <div>
+                <span class="status-indicator" id="statusIndicator"></span>
+                <span id="statusText">Checking API status...</span>
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- API Status Section -->
+            <div class="test-section">
+                <h2>🔍 API Status</h2>
+                <div class="btn-group">
+                    <button class="btn" onclick="checkApiStatus()">Check API Status</button>
+                    <button class="btn" onclick="clearOutput('statusOutput')">Clear Output</button>
+                </div>
+                <div class="output" id="statusOutput">Click "Check API Status" to test the API...</div>
+            </div>
+
+            <!-- Authentication Section -->
+            <div class="test-section">
+                <h2>🔐 Authentication Testing</h2>
+                
+                <!-- Token Storage -->
+                <div class="tokens">
+                    <h3>Current Tokens</h3>
+                    <div><strong>Auth Token:</strong> <span class="token-display" id="authTokenDisplay">Not generated</span></div>
+                    <div><strong>Session Token:</strong> <span class="token-display" id="sessionTokenDisplay">Not logged in</span></div>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn" onclick="generateAuthToken()">Generate Auth Token</button>
+                    <button class="btn" onclick="testLogin()">Test Login</button>
+                    <button class="btn" onclick="testSignup()">Test Signup</button>
+                    <button class="btn" onclick="clearOutput('authOutput')">Clear Output</button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm" class="hidden">
+                    <h3>Login Test</h3>
+                    <div class="form-group">
+                        <label for="loginUsername">Username:</label>
+                        <input type="text" id="loginUsername" placeholder="admin_demo or user_demo">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password:</label>
+                        <input type="password" id="loginPassword" placeholder="password123">
+                    </div>
+                    <button class="btn" onclick="performLogin()">Login</button>
+                    <button class="btn warning" onclick="hideForm('loginForm')">Cancel</button>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signupForm" class="hidden">
+                    <h3>Signup Test</h3>
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" id="firstName" placeholder="John">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" id="lastName" placeholder="Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="john.doe@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="text" id="phone" placeholder="+1234567890">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" placeholder="123 Main St">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" placeholder="New York">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country:</label>
+                        <input type="text" id="country" placeholder="USA">
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" id="dob">
+                    </div>
+                    <button class="btn" onclick="performSignup()">Sign Up</button>
+                    <button class="btn warning" onclick="hideForm('signupForm')">Cancel</button>
+                </div>
+
+                <div class="output" id="authOutput">Authentication tests will appear here...</div>
+            </div>
+
+            <!-- Quote Management Section -->
+            <div class="test-section">
+                <h2>💬 Quote Management</h2>
+                <div class="btn-group">
+                    <button class="btn" onclick="getQuotes()">Get Quotes</button>
+                    <button class="btn" onclick="getRandomQuotes()">Get Random Quotes</button>
+                    <button class="btn" onclick="testAddQuote()">Add Quote</button>
+                    <button class="btn" onclick="testUpdateQuote()">Update Quote</button>
+                    <button class="btn" onclick="testDeleteQuote()">Delete Quote</button>
+                    <button class="btn" onclick="clearOutput('quoteOutput')">Clear Output</button>
+                </div>
+
+                <!-- Add Quote Form -->
+                <div id="addQuoteForm" class="hidden">
+                    <h3>Add New Quote</h3>
+                    <div class="form-group">
+                        <label for="quoteText">Quote Text:</label>
+                        <textarea id="quoteText" placeholder="Enter inspirational quote..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="quoteCategory">Category:</label>
+                        <input type="text" id="quoteCategory" placeholder="motivation, success, life, etc.">
+                    </div>
+                    <button class="btn" onclick="performAddQuote()">Add Quote</button>
+                    <button class="btn warning" onclick="hideForm('addQuoteForm')">Cancel</button>
+                </div>
+
+                <div class="output" id="quoteOutput">Quote management tests will appear here...</div>
+            </div>
+
+            <!-- Member Profile Section -->
+            <div class="test-section">
+                <h2>👤 Member Profile</h2>
+                <div class="btn-group">
+                    <button class="btn" onclick="getProfile()">Get Profile</button>
+                    <button class="btn" onclick="getQuota()">Get Quote Quota</button>
+                    <button class="btn" onclick="testUpdateProfile()">Update Profile</button>
+                    <button class="btn" onclick="clearOutput('memberOutput')">Clear Output</button>
+                </div>
+                <div class="output" id="memberOutput">Member profile tests will appear here...</div>
+            </div>
+
+            <!-- Error Testing Section -->
+            <div class="test-section">
+                <h2>⚠️ Error Testing</h2>
+                <div class="btn-group">
+                    <button class="btn error" onclick="testError('404')">Test 404</button>
+                    <button class="btn error" onclick="testError('500')">Test 500</button>
+                    <button class="btn error" onclick="testError('401')">Test 401</button>
+                    <button class="btn error" onclick="testError('403')">Test 403</button>
+                    <button class="btn error" onclick="testError('429')">Test 429</button>
+                    <button class="btn error" onclick="testError('400')">Test 400</button>
+                    <button class="btn error" onclick="testError('503')">Test 503</button>
+                    <button class="btn warning" onclick="testDelay()">Test Delay</button>
+                    <button class="btn warning" onclick="testTimeout()">Test Timeout</button>
+                    <button class="btn" onclick="clearOutput('errorOutput')">Clear Output</button>
+                </div>
+                <div class="output" id="errorOutput">Error simulation tests will appear here...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables for tokens
+        let authToken = null;
+        let sessionToken = null;
+        const API_BASE = '/api';
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js')
+                .then(registration => {
+                    console.log('Service Worker registered:', registration);
+                    // Wait a moment then check API status
+                    setTimeout(checkApiStatus, 1000);
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                    updateStatus('Service Worker registration failed', false);
+                });
+        }
+
+        // Utility functions
+        function updateOutput(elementId, content) {
+            const element = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            element.textContent = `[${timestamp}] ${content}\n` + element.textContent;
+        }
+
+        function clearOutput(elementId) {
+            document.getElementById(elementId).textContent = '';
+        }
+
+        function updateStatus(message, isOnline) {
+            document.getElementById('statusText').textContent = message;
+            const indicator = document.getElementById('statusIndicator');
+            indicator.className = `status-indicator ${isOnline ? 'status-online' : 'status-offline'}`;
+        }
+
+        function showForm(formId) {
+            document.getElementById(formId).classList.remove('hidden');
+        }
+
+        function hideForm(formId) {
+            document.getElementById(formId).classList.add('hidden');
+        }
+
+        function updateTokenDisplay(type, token) {
+            const elementId = type === 'auth' ? 'authTokenDisplay' : 'sessionTokenDisplay';
+            document.getElementById(elementId).textContent = token || 'None';
+        }
+
+        // API request helper
+        async function apiRequest(endpoint, options = {}) {
+            const url = `${API_BASE}${endpoint}`;
+            const headers = {
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+
+            if (authToken && !sessionToken) {
+                headers['Authorization'] = `Bearer ${authToken}`;
+            } else if (sessionToken) {
+                headers['Authorization'] = `Bearer ${sessionToken}`;
+            }
+
+            try {
+                const response = await fetch(url, {
+                    ...options,
+                    headers
+                });
+
+                const data = await response.json();
+                return { response, data };
+            } catch (error) {
+                return { error: error.message };
+            }
+        }
+
+        // API Status
+        async function checkApiStatus() {
+            updateOutput('statusOutput', 'Checking API status...');
+            
+            const { response, data, error } = await apiRequest('/status');
+            
+            if (error) {
+                updateOutput('statusOutput', `ERROR: ${error}`);
+                updateStatus('API Offline', false);
+                return;
+            }
+
+            updateOutput('statusOutput', `Status: ${response.status}`);
+            updateOutput('statusOutput', JSON.stringify(data, null, 2));
+            
+            if (response.ok) {
+                updateStatus('API Online', true);
+            } else {
+                updateStatus('API Error', false);
+            }
+        }
+
+        // Authentication
+        async function generateAuthToken() {
+            updateOutput('authOutput', 'Generating auth token...');
+            
+            const { response, data, error } = await apiRequest('/auth/token');
+            
+            if (error) {
+                updateOutput('authOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('authOutput', `Status: ${response.status}`);
+            updateOutput('authOutput', JSON.stringify(data, null, 2));
+
+            if (response.ok && data.data) {
+                authToken = data.data.token;
+                updateTokenDisplay('auth', authToken);
+                updateOutput('authOutput', 'Auth token saved for subsequent requests');
+            }
+        }
+
+        function testLogin() {
+            showForm('loginForm');
+        }
+
+        async function performLogin() {
+            if (!authToken) {
+                alert('Please generate an auth token first');
+                return;
+            }
+
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!username || !password) {
+                alert('Please fill in username and password');
+                return;
+            }
+
+            updateOutput('authOutput', 'Attempting login...');
+
+            const { response, data, error } = await apiRequest('/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({ username, password })
+            });
+
+            hideForm('loginForm');
+
+            if (error) {
+                updateOutput('authOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('authOutput', `Status: ${response.status}`);
+            updateOutput('authOutput', JSON.stringify(data, null, 2));
+
+            if (response.ok && data.data) {
+                sessionToken = data.data.sessionToken;
+                updateTokenDisplay('session', sessionToken);
+                updateOutput('authOutput', 'Session token saved for subsequent requests');
+            }
+        }
+
+        function testSignup() {
+            showForm('signupForm');
+            // Set default date
+            document.getElementById('dob').value = '1990-01-01';
+        }
+
+        async function performSignup() {
+            if (!authToken) {
+                alert('Please generate an auth token first');
+                return;
+            }
+
+            const signupData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                country: document.getElementById('country').value,
+                dob: document.getElementById('dob').value
+            };
+
+            // Validate required fields
+            for (let field in signupData) {
+                if (!signupData[field]) {
+                    alert(`Please fill in ${field}`);
+                    return;
+                }
+            }
+
+            updateOutput('authOutput', 'Attempting signup...');
+
+            const { response, data, error } = await apiRequest('/auth/signup', {
+                method: 'POST',
+                body: JSON.stringify(signupData)
+            });
+
+            hideForm('signupForm');
+
+            if (error) {
+                updateOutput('authOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('authOutput', `Status: ${response.status}`);
+            updateOutput('authOutput', JSON.stringify(data, null, 2));
+        }
+
+        // Quote Management
+        async function getQuotes() {
+            updateOutput('quoteOutput', 'Fetching quotes...');
+            
+            const { response, data, error } = await apiRequest('/quotes/list?page=1&limit=5');
+            
+            if (error) {
+                updateOutput('quoteOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('quoteOutput', `Status: ${response.status}`);
+            updateOutput('quoteOutput', JSON.stringify(data, null, 2));
+        }
+
+        async function getRandomQuotes() {
+            updateOutput('quoteOutput', 'Fetching random quotes...');
+            
+            const { response, data, error } = await apiRequest('/quotes/list?random=true&limit=3');
+            
+            if (error) {
+                updateOutput('quoteOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('quoteOutput', `Status: ${response.status}`);
+            updateOutput('quoteOutput', JSON.stringify(data, null, 2));
+        }
+
+        function testAddQuote() {
+            if (!sessionToken) {
+                alert('Please login first');
+                return;
+            }
+            showForm('addQuoteForm');
+        }
+
+        async function performAddQuote() {
+            const text = document.getElementById('quoteText').value;
+            const category = document.getElementById('quoteCategory').value;
+
+            if (!text || !category) {
+                alert('Please fill in quote text and category');
+                return;
+            }
+
+            updateOutput('quoteOutput', 'Adding quote...');
+
+            const { response, data, error } = await apiRequest('/quotes/add', {
+                method: 'POST',
+                body: JSON.stringify({ text, category })
+            });
+
+            hideForm('addQuoteForm');
+
+            if (error) {
+                updateOutput('quoteOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('quoteOutput', `Status: ${response.status}`);
+            updateOutput('quoteOutput', JSON.stringify(data, null, 2));
+
+            // Clear form
+            document.getElementById('quoteText').value = '';
+            document.getElementById('quoteCategory').value = '';
+        }
+
+        async function testUpdateQuote() {
+            alert('Update quote: First add a quote, then modify this function with the quote ID');
+        }
+
+        async function testDeleteQuote() {
+            alert('Delete quote: First add a quote, then modify this function with the quote ID');
+        }
+
+        // Member Profile
+        async function getProfile() {
+            if (!sessionToken) {
+                alert('Please login first');
+                return;
+            }
+
+            updateOutput('memberOutput', 'Fetching profile...');
+            
+            const { response, data, error } = await apiRequest('/members/profile');
+            
+            if (error) {
+                updateOutput('memberOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('memberOutput', `Status: ${response.status}`);
+            updateOutput('memberOutput', JSON.stringify(data, null, 2));
+        }
+
+        async function getQuota() {
+            if (!sessionToken) {
+                alert('Please login first');
+                return;
+            }
+
+            updateOutput('memberOutput', 'Fetching quota information...');
+            
+            const { response, data, error } = await apiRequest('/members/quota');
+            
+            if (error) {
+                updateOutput('memberOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('memberOutput', `Status: ${response.status}`);
+            updateOutput('memberOutput', JSON.stringify(data, null, 2));
+        }
+
+        async function testUpdateProfile() {
+            alert('Update profile: Implement form similar to signup for profile updates');
+        }
+
+        // Error Testing
+        async function testError(errorCode) {
+            updateOutput('errorOutput', `Testing ${errorCode} error...`);
+            
+            let endpoint = `/test/${errorCode}`;
+            let method = errorCode === '400' ? 'POST' : 'GET';
+            
+            const { response, data, error } = await apiRequest(endpoint, { method });
+            
+            if (error) {
+                updateOutput('errorOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('errorOutput', `Status: ${response.status}`);
+            updateOutput('errorOutput', JSON.stringify(data, null, 2));
+        }
+
+        async function testDelay() {
+            updateOutput('errorOutput', 'Testing 3-second delay...');
+            
+            const startTime = Date.now();
+            const { response, data, error } = await apiRequest('/test/delay?ms=3000');
+            const endTime = Date.now();
+            
+            if (error) {
+                updateOutput('errorOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('errorOutput', `Status: ${response.status} (took ${endTime - startTime}ms)`);
+            updateOutput('errorOutput', JSON.stringify(data, null, 2));
+        }
+
+        async function testTimeout() {
+            updateOutput('errorOutput', 'Testing 10-second timeout...');
+            
+            const { response, data, error } = await apiRequest('/test/timeout?ms=10000');
+            
+            if (error) {
+                updateOutput('errorOutput', `ERROR: ${error}`);
+                return;
+            }
+
+            updateOutput('errorOutput', `Status: ${response.status}`);
+            updateOutput('errorOutput', JSON.stringify(data, null, 2));
+        }
+    </script>
+</body>
+</html>

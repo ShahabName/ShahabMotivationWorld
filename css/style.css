@@ -448,3 +448,28 @@ header p {
         grid-template-columns: 1fr;
     }
 }
+
+/* Disclaimer Footer Styles */
+.disclaimer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+    padding: 20px 0;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.disclaimer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.disclaimer p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.disclaimer strong {
+    color: #333;
+}
