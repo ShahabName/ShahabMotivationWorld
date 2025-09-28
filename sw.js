@@ -7,18 +7,14 @@ const TOKEN_EXPIRY = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
 const DATA_EXPIRY = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
 
 // Import API modules
-importScripts('./api/core/response-builder.js');
-importScripts('./api/storage/db-manager.js');
-importScripts('./api/auth/token-manager.js');
-importScripts('./api/auth/session-manager.js');
-importScripts('./api/endpoints/auth-handler.js');
-importScripts('./api/endpoints/quote-handler.js');
-importScripts('./api/endpoints/member-handler.js');
-importScripts('./api/endpoints/test-handler.js');
-importScripts('./api/endpoints/auth-handler.js');
-importScripts('./api/endpoints/quotes-handler.js');
-importScripts('./api/endpoints/members-handler.js');
-importScripts('./api/endpoints/testing-handler.js');
+importScripts('/ShahabMotivationWorld/api/core/response-builder.js');
+importScripts('/ShahabMotivationWorld/api/storage/db-manager.js');
+importScripts('/ShahabMotivationWorld/api/auth/token-manager.js');
+importScripts('/ShahabMotivationWorld/api/auth/session-manager.js');
+importScripts('/ShahabMotivationWorld/api/endpoints/auth-handler.js');
+importScripts('/ShahabMotivationWorld/api/endpoints/quote-handler.js');
+importScripts('/ShahabMotivationWorld/api/endpoints/member-handler.js');
+importScripts('/ShahabMotivationWorld/api/endpoints/test-handler.js');
 
 // Service Worker Installation
 self.addEventListener('install', (event) => {
@@ -50,8 +46,8 @@ self.addEventListener('fetch', (event) => {
     const url = new URL(event.request.url);
     
     // Handle API requests  
-    if (url.pathname.startsWith('/api/')) {
-        event.respondWith(handleApiRequest(request));
+    if (url.pathname.startsWith('/ShahabMotivationWorld/api/')) {
+        event.respondWith(handleApiRequest(event.request));
         return;
     }    // Handle other requests normally
     event.respondWith(
