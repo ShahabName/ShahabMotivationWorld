@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Usage Tutorial - ShahabMotivationWorld</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .tutorial-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tutorial-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        .tutorial-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .tutorial-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .feature-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .feature-section h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .feature-section h3 {
+            color: #495057;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .feature-section h4 {
+            color: #6c757d;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .endpoint-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .get-badge {
+            background-color: #e7f3ff;
+            color: #0066cc;
+            border: 1px solid #0066cc;
+        }
+
+        .post-badge {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #856404;
+        }
+
+        .code-block {
+            background-color: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .code-block code {
+            color: #abb2bf;
+        }
+
+        .response-block {
+            background-color: #f8f9fa;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .response-block h5 {
+            color: #28a745;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .tool-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tool-tab {
+            padding: 8px 16px;
+            background-color: #e9ecef;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .tool-tab:hover {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .toc {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .toc h3 {
+            color: #495057;
+            margin-top: 0;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            padding: 8px 0;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th {
+            background-color: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        table tr:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation Menu -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-heart"></i> Motivations</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="tabs.html"><i class="fas fa-folder"></i> Quotes Tabs</a></li>
+                <li><a href="sports.html"><i class="fas fa-basketball-ball"></i> Sports Quiz</a></li>
+                <li><a href="navigation.html"><i class="fas fa-compass"></i> Multi-Nav</a></li>
+                <li><a href="forms.html"><i class="fas fa-wpforms"></i> HTML Forms</a></li>
+                <li><a href="forms-detailed.html"><i class="fas fa-code"></i> Forms Code</a></li>
+                <li><a href="api-test.html"><i class="fas fa-server"></i> Client Side API</a></li>
+                <li><a href="api-tutorial.html" class="active"><i class="fas fa-book"></i> API Usage Tutorial</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="tutorial-content">
+                <!-- Header -->
+                <div class="tutorial-header">
+                    <h1><i class="fas fa-book-open"></i> API Usage Tutorial</h1>
+                    <p>Complete guide for testing with Postman, Playwright, REST Assured, and Karate</p>
+                </div>
+
+                <!-- Table of Contents -->
+                <div class="toc">
+                    <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                    <ul>
+                        <li><a href="#overview">📋 API Overview</a></li>
+                        <li><a href="#endpoints">🔗 Available Endpoints</a></li>
+                        <li><a href="#status">1️⃣ API Status Check</a></li>
+                        <li><a href="#token">2️⃣ Generate Authentication Token</a></li>
+                        <li><a href="#login">3️⃣ User Login</a></li>
+                        <li><a href="#quotes">4️⃣ Get All Quotes</a></li>
+                        <li><a href="#randomquote">5️⃣ Get Random Quote</a></li>
+                        <li><a href="#workflow">🔄 Complete Authentication Workflow</a></li>
+                        <li><a href="#tools">🛠️ Tool Setup Guide</a></li>
+                    </ul>
+                </div>
+
+                <!-- Overview Section -->
+                <div id="overview" class="feature-section">
+                    <h2>📋 API Overview</h2>
+                    <p>The ShahabMotivationWorld Mock API is a client-side Service Worker-based REST API designed specifically for QA automation testing practice. It provides a complete set of endpoints for testing authentication flows, data retrieval, and error handling scenarios.</p>
+                    
+                    <h3>Key Features:</h3>
+                    <ul>
+                        <li>✅ <strong>No Backend Required:</strong> Runs entirely in the browser using Service Workers</li>
+                        <li>✅ <strong>RESTful Design:</strong> Follows REST API best practices</li>
+                        <li>✅ <strong>Authentication Flow:</strong> Token-based authentication with JWT-style tokens</li>
+                        <li>✅ <strong>Realistic Responses:</strong> Returns properly formatted JSON responses</li>
+                        <li>✅ <strong>Error Scenarios:</strong> Supports testing various HTTP status codes</li>
+                        <li>✅ <strong>Cross-Tool Compatible:</strong> Works with all major testing frameworks</li>
+                    </ul>
+
+                    <div class="info-box">
+                        <p><strong><i class="fas fa-info-circle"></i> Base URL:</strong></p>
+                        <code style="font-size: 16px;">https://shahabname.github.io/ShahabMotivationWorld/api</code>
+                    </div>
+                </div>
+
+                <!-- Endpoints Table -->
+                <div id="endpoints" class="feature-section">
+                    <h2>🔗 Available Endpoints</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Endpoint</th>
+                                <th>Description</th>
+                                <th>Auth Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="endpoint-badge get-badge">GET</span></td>
+                                <td><code>/status</code></td>
+                                <td>Check API operational status</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><span class="endpoint-badge get-badge">GET</span></td>
+                                <td><code>/token</code></td>
+                                <td>Generate authentication token</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><span class="endpoint-badge post-badge">POST</span></td>
+                                <td><code>/login</code></td>
+                                <td>User login with credentials</td>
+                                <td>Yes (Auth Token)</td>
+                            </tr>
+                            <tr>
+                                <td><span class="endpoint-badge get-badge">GET</span></td>
+                                <td><code>/quotes</code></td>
+                                <td>Retrieve all motivational quotes</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td><span class="endpoint-badge get-badge">GET</span></td>
+                                <td><code>/getrandomquote</code></td>
+                                <td>Get a random quote</td>
+                                <td>No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Feature 1: API Status -->
+                <div id="status" class="feature-section">
+                    <h2>1️⃣ API Status Check</h2>
+                    <p><span class="endpoint-badge get-badge">GET</span> <code>/api/status</code></p>
+                    <p>Check if the API is operational and view available endpoints.</p>
+
+                    <h3>📡 Request Details</h3>
+                    <ul>
+                        <li><strong>Method:</strong> GET</li>
+                        <li><strong>URL:</strong> https://shahabname.github.io/ShahabMotivationWorld/api/status</li>
+                        <li><strong>Headers:</strong> None required</li>
+                        <li><strong>Body:</strong> None</li>
+                    </ul>
+
+                    <h3>📤 Example Requests</h3>
+
+                    <h4><i class="fas fa-paper-plane"></i> Postman</h4>
+                    <div class="code-block">
+<code>1. Open Postman
+2. Create new request
+3. Method: GET
+4. URL: https://shahabname.github.io/ShahabMotivationWorld/api/status
+5. Click "Send"</code>
+                    </div>
+
+                    <h4><i class="fas fa-code"></i> Playwright API Context</h4>
+                    <div class="code-block">
+<code>// JavaScript/TypeScript
+const { request } = require('@playwright/test');
+
+const apiContext = await request.newContext({
+    baseURL: 'https://shahabname.github.io/ShahabMotivationWorld'
+});
+
+const response = await apiContext.get('/api/status');
+const data = await response.json();
+
+console.log('Status:', response.status());
+console.log('Response:', data);</code>
+                    </div>
+
+                    <h4><i class="fas fa-java"></i> REST Assured (Java)</h4>
+                    <div class="code-block">
+<code>import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+
+public class ApiStatusTest {
+    @Test
+    public void testApiStatus() {
+        RestAssured.baseURI = "https://shahabname.github.io/ShahabMotivationWorld";
+        
+        Response response = given()
+            .when()
+                .get("/api/status")
+            .then()
+                .statusCode(200)
+                .body("success", equalTo(true))
+                .body("data.status", equalTo("operational"))
+                .extract().response();
+        
+        System.out.println(response.prettyPrint());
+    }
+}</code>
+                    </div>
+
+                    <h4><i class="fas fa-file-code"></i> Karate Framework</h4>
+                    <div class="code-block">
+<code>Feature: API Status Check
+
+Background:
+  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+
+Scenario: Verify API is operational
+  Given path '/api/status'
+  When method get
+  Then status 200
+  And match response.success == true
+  And match response.data.status == 'operational'
+  And match response.data.service == 'ShahabMotivationWorld Mock API'
+  And match response.data.endpoints contains '/api/token'
+  And print 'API Status:', response</code>
+                    </div>
+
+                    <h4><i class="fas fa-terminal"></i> cURL</h4>
+                    <div class="code-block">
+<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/status" \
+  -H "Accept: application/json"</code>
+                    </div>
+
+                    <h3>📥 Response</h3>
+                    <div class="response-block">
+                        <h5>HTTP 200 OK</h5>
+                        <div class="code-block">
+<code>{
+  "success": true,
+  "data": {
+    "status": "operational",
+    "service": "ShahabMotivationWorld Mock API",
+    "version": "1.0.0",
+    "endpoints": [
+      "/api/token",
+      "/api/login",
+      "/api/getrandomquote",
+      "/api/quotes",
+      "/api/status"
+    ],
+    "uptime": "99.9%",
+    "lastUpdated": "2025-01-29T12:00:00Z"
+  },
+  "message": "API is running successfully",
+  "timestamp": "2025-01-29T12:00:00Z"
+}</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Generate Token -->
+                <div id="token" class="feature-section">
+                    <h2>2️⃣ Generate Authentication Token</h2>
+                    <p><span class="endpoint-badge get-badge">GET</span> <code>/api/token</code></p>
+                    <p>Generate a bearer token required for authenticated API requests.</p>
+
+                    <h3>📡 Request Details</h3>
+                    <ul>
+                        <li><strong>Method:</strong> GET</li>
+                        <li><strong>URL:</strong> https://shahabname.github.io/ShahabMotivationWorld/api/token</li>
+                        <li><strong>Headers:</strong> None required</li>
+                        <li><strong>Body:</strong> None</li>
+                    </ul>
+
+                    <h3>📤 Example Requests</h3>
+
+                    <h4><i class="fas fa-paper-plane"></i> Postman</h4>
+                    <div class="code-block">
+<code>1. Create new GET request
+2. URL: https://shahabname.github.io/ShahabMotivationWorld/api/token
+3. Click "Send"
+4. Copy the token from response.data.token
+5. Save it as environment variable: {{authToken}}</code>
+                    </div>
+
+                    <h4><i class="fas fa-code"></i> Playwright API Context</h4>
+                    <div class="code-block">
+<code>const response = await apiContext.get('/api/token');
+const data = await response.json();
+
+// Extract and store token
+const authToken = data.data.token;
+console.log('Auth Token:', authToken);
+
+// Use token in subsequent requests
+const headers = {
+    'Authorization': `Bearer ${authToken}`
+};</code>
+                    </div>
+
+                    <h4><i class="fas fa-java"></i> REST Assured (Java)</h4>
+                    <div class="code-block">
+<code>@Test
+public void testGenerateToken() {
+    Response response = given()
+        .baseUri("https://shahabname.github.io/ShahabMotivationWorld")
+        .when()
+            .get("/api/token")
+        .then()
+            .statusCode(200)
+            .body("success", equalTo(true))
+            .extract().response();
+    
+    String authToken = response.jsonPath().getString("data.token");
+    System.out.println("Auth Token: " + authToken);
+    
+    // Store for later use
+    return authToken;
+}</code>
+                    </div>
+
+                    <h4><i class="fas fa-file-code"></i> Karate Framework</h4>
+                    <div class="code-block">
+<code>Feature: Generate Authentication Token
+
+Background:
+  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+
+Scenario: Get auth token for subsequent requests
+  Given path '/api/token'
+  When method get
+  Then status 200
+  And match response.success == true
+  And match response.data.token == '#string'
+  And match response.data.type == 'bearer'
+  
+  # Store token for reuse
+  * def authToken = response.data.token
+  * print 'Token generated:', authToken</code>
+                    </div>
+
+                    <h4><i class="fas fa-terminal"></i> cURL</h4>
+                    <div class="code-block">
+<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/token" \
+  -H "Accept: application/json"</code>
+                    </div>
+
+                    <h3>📥 Response</h3>
+                    <div class="response-block">
+                        <h5>HTTP 200 OK</h5>
+                        <div class="code-block">
+<code>{
+  "success": true,
+  "data": {
+    "token": "auth_1738261234567_abc123xyz",
+    "expires": "2025-01-30T18:00:00Z",
+    "type": "bearer"
+  },
+  "message": "Authentication token generated successfully",
+  "timestamp": "2025-01-29T12:00:00Z"
+}</code>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <p><strong><i class="fas fa-exclamation-triangle"></i> Important:</strong> Tokens expire after 6 hours. Store the token securely and use it in the Authorization header for protected endpoints.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3: User Login -->
+                <div id="login" class="feature-section">
+                    <h2>3️⃣ User Login</h2>
+                    <p><span class="endpoint-badge post-badge">POST</span> <code>/api/login</code></p>
+                    <p>Authenticate user with credentials and receive a session token.</p>
+
+                    <h3>📡 Request Details</h3>
+                    <ul>
+                        <li><strong>Method:</strong> POST</li>
+                        <li><strong>URL:</strong> https://shahabname.github.io/ShahabMotivationWorld/api/login</li>
+                        <li><strong>Headers:</strong> 
+                            <ul>
+                                <li><code>Authorization: Bearer {authToken}</code></li>
+                                <li><code>Content-Type: application/json</code></li>
+                            </ul>
+                        </li>
+                        <li><strong>Body:</strong> JSON with username and password</li>
+                    </ul>
+
+                    <h3>Request Body Schema</h3>
+                    <div class="code-block">
+<code>{
+  "username": "string (required)",
+  "password": "string (required)"
+}</code>
+                    </div>
+
+                    <h3>📤 Example Requests</h3>
+
+                    <h4><i class="fas fa-paper-plane"></i> Postman</h4>
+                    <div class="code-block">
+<code>1. Create new POST request
+2. URL: https://shahabname.github.io/ShahabMotivationWorld/api/login
+3. Headers:
+   - Authorization: Bearer {{authToken}}
+   - Content-Type: application/json
+4. Body (raw JSON):
+   {
+     "username": "demo_user",
+     "password": "password123"
+   }
+5. Click "Send"</code>
+                    </div>
+
+                    <h4><i class="fas fa-code"></i> Playwright API Context</h4>
+                    <div class="code-block">
+<code>// First get auth token
+const tokenResponse = await apiContext.get('/api/token');
+const authToken = (await tokenResponse.json()).data.token;
+
+// Then perform login
+const loginResponse = await apiContext.post('/api/login', {
+    headers: {
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+    },
+    data: {
+        username: 'demo_user',
+        password: 'password123'
+    }
+});
+
+const loginData = await loginResponse.json();
+const sessionToken = loginData.data.sessionToken;
+console.log('Login successful! Session Token:', sessionToken);</code>
+                    </div>
+
+                    <h4><i class="fas fa-java"></i> REST Assured (Java)</h4>
+                    <div class="code-block">
+<code>@Test
+public void testUserLogin() {
+    // First get auth token
+    String authToken = getAuthToken();
+    
+    // Prepare login credentials
+    Map<String, String> credentials = new HashMap<>();
+    credentials.put("username", "demo_user");
+    credentials.put("password", "password123");
+    
+    // Perform login
+    Response response = given()
+        .baseUri("https://shahabname.github.io/ShahabMotivationWorld")
+        .header("Authorization", "Bearer " + authToken)
+        .contentType("application/json")
+        .body(credentials)
+        .when()
+            .post("/api/login")
+        .then()
+            .statusCode(200)
+            .body("success", equalTo(true))
+            .body("data.user.username", equalTo("demo_user"))
+            .extract().response();
+    
+    String sessionToken = response.jsonPath().getString("data.sessionToken");
+    System.out.println("Session Token: " + sessionToken);
+}</code>
+                    </div>
+
+                    <h4><i class="fas fa-file-code"></i> Karate Framework</h4>
+                    <div class="code-block">
+<code>Feature: User Login Flow
+
+Background:
+  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+
+Scenario: Successful user login with valid credentials
+  # Step 1: Get authentication token
+  Given path '/api/token'
+  When method get
+  Then status 200
+  * def authToken = response.data.token
+  
+  # Step 2: Login with credentials
+  Given path '/api/login'
+  And header Authorization = 'Bearer ' + authToken
+  And request { username: 'demo_user', password: 'password123' }
+  When method post
+  Then status 200
+  And match response.success == true
+  And match response.data.user.username == 'demo_user'
+  And match response.data.sessionToken == '#string'
+  
+  # Store session token
+  * def sessionToken = response.data.sessionToken
+  * print 'Login successful! Session Token:', sessionToken</code>
+                    </div>
+
+                    <h4><i class="fas fa-terminal"></i> cURL</h4>
+                    <div class="code-block">
+<code># First get the token
+TOKEN=$(curl -s "https://shahabname.github.io/ShahabMotivationWorld/api/token" | jq -r '.data.token')
+
+# Then login
+curl -X POST "https://shahabname.github.io/ShahabMotivationWorld/api/login" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "demo_user",
+    "password": "password123"
+  }'</code>
+                    </div>
+
+                    <h3>📥 Response</h3>
+                    <div class="response-block">
+                        <h5>HTTP 200 OK</h5>
+                        <div class="code-block">
+<code>{
+  "success": true,
+  "data": {
+    "user": {
+      "id": "user_001",
+      "username": "demo_user",
+      "email": "demo@shahabworld.com",
+      "role": "member"
+    },
+    "sessionToken": "session_1738261234567_xyz789abc",
+    "expires": "2025-01-30T18:00:00Z"
+  },
+  "message": "Login successful",
+  "timestamp": "2025-01-29T12:00:00Z"
+}</code>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <p><strong><i class="fas fa-users"></i> Test Credentials:</strong></p>
+                        <ul>
+                            <li>Username: <code>demo_user</code> | Password: <code>password123</code></li>
+                            <li>Username: <code>admin_demo</code> | Password: <code>admin123</code></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Get All Quotes -->
+                <div id="quotes" class="feature-section">
+                    <h2>4️⃣ Get All Quotes</h2>
+                    <p><span class="endpoint-badge get-badge">GET</span> <code>/api/quotes</code></p>
+                    <p>Retrieve all motivational quotes from the database.</p>
+
+                    <h3>📡 Request Details</h3>
+                    <ul>
+                        <li><strong>Method:</strong> GET</li>
+                        <li><strong>URL:</strong> https://shahabname.github.io/ShahabMotivationWorld/api/quotes</li>
+                        <li><strong>Headers:</strong> None required</li>
+                        <li><strong>Body:</strong> None</li>
+                    </ul>
+
+                    <h3>📤 Example Requests</h3>
+
+                    <h4><i class="fas fa-paper-plane"></i> Postman</h4>
+                    <div class="code-block">
+<code>1. Create new GET request
+2. URL: https://shahabname.github.io/ShahabMotivationWorld/api/quotes
+3. Click "Send"
+4. View the array of quotes in response</code>
+                    </div>
+
+                    <h4><i class="fas fa-code"></i> Playwright API Context</h4>
+                    <div class="code-block">
+<code>const response = await apiContext.get('/api/quotes');
+const data = await response.json();
+
+console.log('Total Quotes:', data.data.pagination.total);
+console.log('Quotes:', data.data.quotes);
+
+// Access individual quotes
+data.data.quotes.forEach(quote => {
+    console.log(`${quote.text} - ${quote.author}`);
+});</code>
+                    </div>
+
+                    <h4><i class="fas fa-java"></i> REST Assured (Java)</h4>
+                    <div class="code-block">
+<code>@Test
+public void testGetAllQuotes() {
+    Response response = given()
+        .baseUri("https://shahabname.github.io/ShahabMotivationWorld")
+        .when()
+            .get("/api/quotes")
+        .then()
+            .statusCode(200)
+            .body("success", equalTo(true))
+            .body("data.quotes", hasSize(greaterThan(0)))
+            .extract().response();
+    
+    List<Map<String, String>> quotes = response.jsonPath().getList("data.quotes");
+    System.out.println("Total quotes: " + quotes.size());
+    
+    // Print all quotes
+    quotes.forEach(quote -> {
+        System.out.println(quote.get("text") + " - " + quote.get("author"));
+    });
+}</code>
+                    </div>
+
+                    <h4><i class="fas fa-file-code"></i> Karate Framework</h4>
+                    <div class="code-block">
+<code>Feature: Get All Quotes
+
+Background:
+  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+
+Scenario: Retrieve all motivational quotes
+  Given path '/api/quotes'
+  When method get
+  Then status 200
+  And match response.success == true
+  And match response.data.quotes == '#[]'
+  And match response.data.quotes[0].id == '#string'
+  And match response.data.quotes[0].text == '#string'
+  And match response.data.quotes[0].author == '#string'
+  And match response.data.pagination.total == '#number'
+  
+  * def totalQuotes = response.data.pagination.total
+  * print 'Total quotes available:', totalQuotes</code>
+                    </div>
+
+                    <h4><i class="fas fa-terminal"></i> cURL</h4>
+                    <div class="code-block">
+<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/quotes" \
+  -H "Accept: application/json"</code>
+                    </div>
+
+                    <h3>📥 Response</h3>
+                    <div class="response-block">
+                        <h5>HTTP 200 OK</h5>
+                        <div class="code-block">
+<code>{
+  "success": true,
+  "data": {
+    "quotes": [
+      {
+        "id": "quote_001",
+        "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+        "author": "Winston Churchill"
+      },
+      {
+        "id": "quote_002",
+        "text": "The only way to do great work is to love what you do.",
+        "author": "Steve Jobs"
+      },
+      {
+        "id": "quote_003",
+        "text": "Innovation distinguishes between a leader and a follower.",
+        "author": "Steve Jobs"
+      }
+      // ... more quotes
+    ],
+    "pagination": {
+      "total": 5,
+      "page": 1,
+      "limit": 10
+    }
+  },
+  "message": "Quotes retrieved successfully",
+  "timestamp": "2025-01-29T12:00:00Z"
+}</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 5: Get Random Quote -->
+                <div id="randomquote" class="feature-section">
+                    <h2>5️⃣ Get Random Quote</h2>
+                    <p><span class="endpoint-badge get-badge">GET</span> <code>/api/getrandomquote</code></p>
+                    <p>Retrieve a single random motivational quote.</p>
+
+                    <h3>📡 Request Details</h3>
+                    <ul>
+                        <li><strong>Method:</strong> GET</li>
+                        <li><strong>URL:</strong> https://shahabname.github.io/ShahabMotivationWorld/api/getrandomquote</li>
+                        <li><strong>Headers:</strong> None required</li>
+                        <li><strong>Body:</strong> None</li>
+                    </ul>
+
+                    <h3>📤 Example Requests</h3>
+
+                    <h4><i class="fas fa-paper-plane"></i> Postman</h4>
+                    <div class="code-block">
+<code>1. Create new GET request
+2. URL: https://shahabname.github.io/ShahabMotivationWorld/api/getrandomquote
+3. Click "Send"
+4. Each request returns a different random quote</code>
+                    </div>
+
+                    <h4><i class="fas fa-code"></i> Playwright API Context</h4>
+                    <div class="code-block">
+<code>// Get a random quote
+const response = await apiContext.get('/api/getrandomquote');
+const data = await response.json();
+
+console.log('Random Quote:', data.data.text);
+console.log('Author:', data.data.author);
+console.log('Category:', data.data.category);
+
+// Get multiple random quotes
+for (let i = 0; i < 3; i++) {
+    const res = await apiContext.get('/api/getrandomquote');
+    const quote = await res.json();
+    console.log(`Quote ${i + 1}:`, quote.data.text);
+}</code>
+                    </div>
+
+                    <h4><i class="fas fa-java"></i> REST Assured (Java)</h4>
+                    <div class="code-block">
+<code>@Test
+public void testGetRandomQuote() {
+    Response response = given()
+        .baseUri("https://shahabname.github.io/ShahabMotivationWorld")
+        .when()
+            .get("/api/getrandomquote")
+        .then()
+            .statusCode(200)
+            .body("success", equalTo(true))
+            .body("data.id", notNullValue())
+            .body("data.text", notNullValue())
+            .body("data.author", notNullValue())
+            .extract().response();
+    
+    String quoteText = response.jsonPath().getString("data.text");
+    String author = response.jsonPath().getString("data.author");
+    
+    System.out.println("Random Quote: " + quoteText);
+    System.out.println("Author: " + author);
+}
+
+@Test
+public void testMultipleRandomQuotes() {
+    // Test that we get different quotes on multiple calls
+    Set<String> quoteIds = new HashSet<>();
+    
+    for (int i = 0; i < 5; i++) {
+        Response response = given()
+            .baseUri("https://shahabname.github.io/ShahabMotivationWorld")
+            .get("/api/getrandomquote");
+        
+        String quoteId = response.jsonPath().getString("data.id");
+        quoteIds.add(quoteId);
+    }
+    
+    System.out.println("Unique quotes received: " + quoteIds.size());
+}</code>
+                    </div>
+
+                    <h4><i class="fas fa-file-code"></i> Karate Framework</h4>
+                    <div class="code-block">
+<code>Feature: Get Random Quote
+
+Background:
+  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+
+Scenario: Get a random motivational quote
+  Given path '/api/getrandomquote'
+  When method get
+  Then status 200
+  And match response.success == true
+  And match response.data == 
+    """
+    {
+      id: '#string',
+      text: '#string',
+      author: '#string',
+      category: '#string'
+    }
+    """
+  * print 'Random Quote:', response.data.text
+  * print 'By:', response.data.author
+
+Scenario: Verify randomness - call multiple times
+  * def getQuote = 
+    """
+    function() {
+      var response = karate.call('classpath:get-random-quote.feature');
+      return response.data.id;
+    }
+    """
+  * def id1 = call getQuote
+  * def id2 = call getQuote
+  * def id3 = call getQuote
+  * print 'Received quote IDs:', id1, id2, id3</code>
+                    </div>
+
+                    <h4><i class="fas fa-terminal"></i> cURL</h4>
+                    <div class="code-block">
+<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/getrandomquote" \
+  -H "Accept: application/json"</code>
+                    </div>
+
+                    <h3>📥 Response</h3>
+                    <div class="response-block">
+                        <h5>HTTP 200 OK</h5>
+                        <div class="code-block">
+<code>{
+  "success": true,
+  "data": {
+    "id": "quote_001",
+    "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+    "author": "Winston Churchill",
+    "category": "motivation"
+  },
+  "message": "Random quote retrieved successfully",
+  "timestamp": "2025-01-29T12:00:00Z"
+}</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complete Workflow -->
+                <div id="workflow" class="feature-section">
+                    <h2>🔄 Complete Authentication Workflow</h2>
+                    <p>Step-by-step example of the full authentication flow from token generation to accessing protected resources.</p>
+
+                    <h3><i class="fas fa-code"></i> Complete Playwright Example</h3>
+                    <div class="code-block">
+<code>import { test, expect } from '@playwright/test';
+
+test.describe('Complete API Authentication Flow', () => {
+    let apiContext;
+    let authToken;
+    let sessionToken;
+
+    test.beforeAll(async ({ playwright }) => {
+        apiContext = await playwright.request.newContext({
+            baseURL: 'https://shahabname.github.io/ShahabMotivationWorld'
+        });
+    });
+
+    test('Step 1: Check API Status', async () => {
+        const response = await apiContext.get('/api/status');
+        expect(response.status()).toBe(200);
+        
+        const data = await response.json();
+        expect(data.success).toBe(true);
+        expect(data.data.status).toBe('operational');
+        console.log('✓ API is operational');
+    });
+
+    test('Step 2: Generate Auth Token', async () => {
+        const response = await apiContext.get('/api/token');
+        expect(response.status()).toBe(200);
+        
+        const data = await response.json();
+        authToken = data.data.token;
+        expect(authToken).toBeTruthy();
+        console.log('✓ Auth token generated:', authToken);
+    });
+
+    test('Step 3: Login with Credentials', async () => {
+        const response = await apiContext.post('/api/login', {
+            headers: {
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json'
+            },
+            data: {
+                username: 'demo_user',
+                password: 'password123'
+            }
+        });
+        
+        expect(response.status()).toBe(200);
+        const data = await response.json();
+        sessionToken = data.data.sessionToken;
+        expect(sessionToken).toBeTruthy();
+        console.log('✓ Login successful, session token:', sessionToken);
+    });
+
+    test('Step 4: Access Protected Resource', async () => {
+        const response = await apiContext.get('/api/quotes', {
+            headers: {
+                'Authorization': `Bearer ${sessionToken}`
+            }
+        });
+        
+        expect(response.status()).toBe(200);
+        const data = await response.json();
+        expect(data.data.quotes.length).toBeGreaterThan(0);
+        console.log('✓ Retrieved', data.data.quotes.length, 'quotes');
+    });
+
+    test('Step 5: Get Random Quote', async () => {
+        const response = await apiContext.get('/api/getrandomquote');
+        expect(response.status()).toBe(200);
+        
+        const data = await response.json();
+        console.log('✓ Random quote:', data.data.text);
+        console.log('  Author:', data.data.author);
+    });
+
+    test.afterAll(async () => {
+        await apiContext.dispose();
+    });
+});</code>
+                    </div>
+
+                    <h3><i class="fas fa-file-code"></i> Complete Karate Example</h3>
+                    <div class="code-block">
+<code>Feature: Complete API Authentication Workflow
+
+Background:
+  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+  * configure headers = { 'Accept': 'application/json' }
+
+Scenario: End-to-end API testing workflow
+  # Step 1: Verify API is operational
+  Given path '/api/status'
+  When method get
+  Then status 200
+  And match response.data.status == 'operational'
+  * print '✓ API is operational'
+  
+  # Step 2: Generate authentication token
+  Given path '/api/token'
+  When method get
+  Then status 200
+  And match response.data.token == '#string'
+  * def authToken = response.data.token
+  * print '✓ Auth token generated'
+  
+  # Step 3: Login with credentials
+  Given path '/api/login'
+  And header Authorization = 'Bearer ' + authToken
+  And request { username: 'demo_user', password: 'password123' }
+  When method post
+  Then status 200
+  And match response.data.sessionToken == '#string'
+  * def sessionToken = response.data.sessionToken
+  * print '✓ Login successful'
+  
+  # Step 4: Get all quotes
+  Given path '/api/quotes'
+  When method get
+  Then status 200
+  And match response.data.quotes == '#[]'
+  * def quoteCount = response.data.pagination.total
+  * print '✓ Retrieved', quoteCount, 'quotes'
+  
+  # Step 5: Get random quote
+  Given path '/api/getrandomquote'
+  When method get
+  Then status 200
+  And match response.data.text == '#string'
+  * print '✓ Random quote:', response.data.text
+  * print '  Author:', response.data.author</code>
+                    </div>
+
+                    <h3><i class="fas fa-java"></i> Complete REST Assured Example</h3>
+                    <div class="code-block">
+<code>public class CompleteApiWorkflowTest {
+    
+    private static final String BASE_URI = "https://shahabname.github.io/ShahabMotivationWorld";
+    private String authToken;
+    private String sessionToken;
+    
+    @Test(priority = 1)
+    public void step1_checkApiStatus() {
+        given()
+            .baseUri(BASE_URI)
+        .when()
+            .get("/api/status")
+        .then()
+            .statusCode(200)
+            .body("data.status", equalTo("operational"));
+        
+        System.out.println("✓ API is operational");
+    }
+    
+    @Test(priority = 2)
+    public void step2_generateAuthToken() {
+        Response response = given()
+            .baseUri(BASE_URI)
+        .when()
+            .get("/api/token")
+        .then()
+            .statusCode(200)
+            .extract().response();
+        
+        authToken = response.jsonPath().getString("data.token");
+        assertNotNull(authToken);
+        System.out.println("✓ Auth token generated: " + authToken);
+    }
+    
+    @Test(priority = 3)
+    public void step3_loginWithCredentials() {
+        Map<String, String> credentials = new HashMap<>();
+        credentials.put("username", "demo_user");
+        credentials.put("password", "password123");
+        
+        Response response = given()
+            .baseUri(BASE_URI)
+            .header("Authorization", "Bearer " + authToken)
+            .contentType("application/json")
+            .body(credentials)
+        .when()
+            .post("/api/login")
+        .then()
+            .statusCode(200)
+            .extract().response();
+        
+        sessionToken = response.jsonPath().getString("data.sessionToken");
+        assertNotNull(sessionToken);
+        System.out.println("✓ Login successful");
+    }
+    
+    @Test(priority = 4)
+    public void step4_getAllQuotes() {
+        Response response = given()
+            .baseUri(BASE_URI)
+            .header("Authorization", "Bearer " + sessionToken)
+        .when()
+            .get("/api/quotes")
+        .then()
+            .statusCode(200)
+            .extract().response();
+        
+        int quoteCount = response.jsonPath().getInt("data.pagination.total");
+        System.out.println("✓ Retrieved " + quoteCount + " quotes");
+    }
+    
+    @Test(priority = 5)
+    public void step5_getRandomQuote() {
+        Response response = given()
+            .baseUri(BASE_URI)
+        .when()
+            .get("/api/getrandomquote")
+        .then()
+            .statusCode(200)
+            .extract().response();
+        
+        String quoteText = response.jsonPath().getString("data.text");
+        String author = response.jsonPath().getString("data.author");
+        System.out.println("✓ Random quote: " + quoteText);
+        System.out.println("  Author: " + author);
+    }
+}</code>
+                    </div>
+                </div>
+
+                <!-- Tool Setup Guide -->
+                <div id="tools" class="feature-section">
+                    <h2>🛠️ Tool Setup Guide</h2>
+                    
+                    <h3><i class="fas fa-paper-plane"></i> Postman Setup</h3>
+                    <div class="code-block">
+<code>1. Download Postman from https://www.postman.com/downloads/
+2. Create a new Collection: "ShahabMotivationWorld API"
+3. Add environment variables:
+   - baseUrl: https://shahabname.github.io/ShahabMotivationWorld
+   - authToken: (will be set dynamically)
+   - sessionToken: (will be set dynamically)
+4. Import requests from this tutorial
+5. Use Tests tab to extract and save tokens:
+   pm.environment.set("authToken", pm.response.json().data.token);</code>
+                    </div>
+
+                    <h3><i class="fas fa-code"></i> Playwright Setup</h3>
+                    <div class="code-block">
+<code># Install Playwright
+npm init playwright@latest
+
+# Install dependencies
+npm install @playwright/test
+
+# Create test file
+# tests/api.spec.ts
+
+# Run tests
+npx playwright test
+
+# View report
+npx playwright show-report</code>
+                    </div>
+
+                    <h3><i class="fas fa-java"></i> REST Assured Setup (Maven)</h3>
+                    <div class="code-block">
+<code>&lt;!-- Add to pom.xml --&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.rest-assured&lt;/groupId&gt;
+        &lt;artifactId&gt;rest-assured&lt;/artifactId&gt;
+        &lt;version&gt;5.3.2&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.testng&lt;/groupId&gt;
+        &lt;artifactId&gt;testng&lt;/artifactId&gt;
+        &lt;version&gt;7.8.0&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code>
+                    </div>
+
+                    <h3><i class="fas fa-file-code"></i> Karate Framework Setup (Maven)</h3>
+                    <div class="code-block">
+<code>&lt;!-- Add to pom.xml --&gt;
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.intuit.karate&lt;/groupId&gt;
+        &lt;artifactId&gt;karate-junit5&lt;/artifactId&gt;
+        &lt;version&gt;1.4.1&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+# Create feature file structure
+src/test/java/features/api-tests.feature
+
+# Run tests
+mvn test</code>
+                    </div>
+
+                    <div class="info-box">
+                        <p><strong><i class="fas fa-book"></i> Additional Resources:</strong></p>
+                        <ul>
+                            <li><a href="https://playwright.dev/docs/api-testing" target="_blank">Playwright API Testing Docs</a></li>
+                            <li><a href="https://rest-assured.io/" target="_blank">REST Assured Documentation</a></li>
+                            <li><a href="https://karatelabs.github.io/karate/" target="_blank">Karate Framework Docs</a></li>
+                            <li><a href="https://learning.postman.com/" target="_blank">Postman Learning Center</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="feature-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h2 style="color: white; border-bottom: 3px solid white;">🎓 Next Steps</h2>
+                    <ul>
+                        <li>✅ Try the <a href="api-test.html" style="color: #fff; text-decoration: underline;">Interactive API Testing Page</a></li>
+                        <li>✅ Build your automation test suite using these examples</li>
+                        <li>✅ Practice with different test scenarios and edge cases</li>
+                        <li>✅ Share your automation projects on LinkedIn</li>
+                    </ul>
+                    
+                    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.3);">
+                        <p>Created for QA Engineers by QA Engineers 💙</p>
+                        <p><a href="index.html" style="color: white; text-decoration: none;">⬅️ Back to Home</a></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
