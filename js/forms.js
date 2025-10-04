@@ -279,6 +279,65 @@ function handleSubmit(event) {
     
     // Add celebration animation
     confetti();
+    
+    // Show success alert for 30 seconds
+    showSuccessAlert();
+}
+
+// Show success alert that auto-dismisses after 30 seconds
+function showSuccessAlert() {
+    // Create alert element
+    const alertDiv = document.createElement('div');
+    alertDiv.id = 'success-alert';
+    alertDiv.className = 'success-alert';
+    alertDiv.innerHTML = `
+        <div class="success-alert-content">
+            <i class="fas fa-check-circle"></i>
+            <div class="alert-text">
+                <strong>Success!</strong>
+                <p>Your form has been submitted successfully!</p>
+            </div>
+            <button class="alert-close" onclick="closeSuccessAlert()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="alert-progress-bar"></div>
+    `;
+    
+    document.body.appendChild(alertDiv);
+    
+    // Trigger animation
+    setTimeout(() => {
+        alertDiv.classList.add('show');
+    }, 10);
+    
+    // Start progress bar animation
+    const progressBar = alertDiv.querySelector('.alert-progress-bar');
+    progressBar.style.animation = 'progressBarAnimation 30s linear forwards';
+    
+    // Auto-dismiss after 30 seconds
+    const dismissTimeout = setTimeout(() => {
+        closeSuccessAlert();
+    }, 30000);
+    
+    // Store timeout ID for manual close
+    alertDiv.dataset.timeoutId = dismissTimeout;
+}
+
+// Close success alert
+function closeSuccessAlert() {
+    const alertDiv = document.getElementById('success-alert');
+    if (alertDiv) {
+        // Clear the timeout if manually closed
+        if (alertDiv.dataset.timeoutId) {
+            clearTimeout(parseInt(alertDiv.dataset.timeoutId));
+        }
+        
+        alertDiv.classList.remove('show');
+        setTimeout(() => {
+            alertDiv.remove();
+        }, 300);
+    }
 }
 
 // Simple confetti animation
@@ -393,6 +452,105 @@ validationStyle.textContent = `
     @keyframes pulse {
         0%, 100% { transform: scale(1); }
         50% { transform: scale(1.02); }
+    }
+    
+    /* Success Alert Styles */
+    .success-alert {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        color: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        z-index: 10000;
+        min-width: 350px;
+        max-width: 450px;
+        transform: translateX(500px);
+        opacity: 0;
+        transition: all 0.3s ease-out;
+        overflow: hidden;
+    }
+    
+    .success-alert.show {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    
+    .success-alert-content {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        gap: 15px;
+    }
+    
+    .success-alert i.fa-check-circle {
+        font-size: 40px;
+        color: white;
+        flex-shrink: 0;
+    }
+    
+    .alert-text {
+        flex: 1;
+    }
+    
+    .alert-text strong {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    
+    .alert-text p {
+        margin: 0;
+        font-size: 14px;
+        opacity: 0.9;
+    }
+    
+    .alert-close {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        flex-shrink: 0;
+    }
+    
+    .alert-close:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.1);
+    }
+    
+    .alert-progress-bar {
+        height: 4px;
+        background: rgba(255, 255, 255, 0.3);
+        width: 100%;
+    }
+    
+    @keyframes progressBarAnimation {
+        from {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        to {
+            width: 0%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+    }
+    
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+        .success-alert {
+            right: 10px;
+            left: 10px;
+            min-width: auto;
+            max-width: none;
+        }
     }
 `;
 document.head.appendChild(validationStyle);
