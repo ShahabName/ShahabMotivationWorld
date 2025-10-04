@@ -3,8 +3,9 @@
 
 const CACHE_NAME = 'shahab-motivation-api-v1';
 const API_BASE_PATH = '/ShahabMotivationWorld/api';
-const TOKEN_EXPIRY = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
-const DATA_EXPIRY = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
+// Tokens and data persist indefinitely in IndexedDB unless manually cleared by user
+const TOKEN_EXPIRY = null; // No automatic expiry
+const DATA_EXPIRY = null; // No automatic expiry
 
 // Import API modules
 importScripts('/ShahabMotivationWorld/api/core/response-builder.js');
@@ -33,10 +34,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
     console.log('[SW] Activating Service Worker...');
     event.waitUntil(
-        Promise.all([
-            clearOldCaches(),
-            startCleanupScheduler()
-        ])
+        clearOldCaches()
     );
     self.clients.claim();
 });
@@ -280,20 +278,8 @@ async function clearOldCaches() {
     );
 }
 
-// Start cleanup scheduler for 6-hour expiry
-function startCleanupScheduler() {
-    // Run cleanup every hour
-    setInterval(async () => {
-        try {
-            await DBManager.cleanupExpiredData(DATA_EXPIRY);
-            await TokenManager.cleanupExpiredTokens(TOKEN_EXPIRY);
-            await SessionManager.cleanupExpiredSessions(TOKEN_EXPIRY);
-            console.log('[SW] Cleanup completed');
-        } catch (error) {
-            console.error('[SW] Cleanup error:', error);
-        }
-    }, 60 * 60 * 1000); // Run every hour
-}
+// Cleanup scheduler removed - data persists indefinitely unless manually cleared
+// Users must manually clear browser data to reset the API state
 
 // Utility function to generate IDs
 function generateId(prefix = 'id') {
