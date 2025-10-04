@@ -94,7 +94,7 @@ const autoFillData = {
         "https://danielgarcia.com",
         "https://sophiaanderson.dev",
         "https://mohammedamin.edu",
-        "https://mohammedshahab.mentor"
+        "https://shahabname.github.io/ShahabMotivationWorld/"
     ],
     phones: [
         "+1-555-0101",
@@ -171,9 +171,20 @@ function autoFillForm() {
     document.getElementById('motivation').value = motivationLevel;
     updateMotivationValue(motivationLevel);
     
-    // Fill favorite color (random color)
-    const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#fa709a', '#30cfd0', '#a8edea', '#11998e', '#38ef7d'];
-    document.getElementById('favoriteColor').value = colors[randomIndex];
+    // Fill favorite color (special colors for Amin and Shahab, random for others)
+    let favoriteColor;
+    if (randomIndex === 10) {
+        // Mohammed Amin's favorite color: Blue
+        favoriteColor = '#0000FF';
+    } else if (randomIndex === 11) {
+        // Mohammed Shahab's favorite color: Maroon
+        favoriteColor = '#800000';
+    } else {
+        // Random color for other profiles
+        const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#fa709a', '#30cfd0', '#a8edea', '#11998e', '#38ef7d'];
+        favoriteColor = colors[randomIndex];
+    }
+    document.getElementById('favoriteColor').value = favoriteColor;
     
     // Fill country
     document.getElementById('country').value = autoFillData.countries[randomIndex];
@@ -360,12 +371,12 @@ function showSuccessAlert() {
     
     // Start progress bar animation
     const progressBar = alertDiv.querySelector('.alert-progress-bar');
-    progressBar.style.animation = 'progressBarAnimation 30s linear forwards';
+    progressBar.style.animation = 'progressBarAnimation 10s linear forwards';
     
-    // Auto-dismiss after 30 seconds
+    // Auto-dismiss after 10 seconds
     const dismissTimeout = setTimeout(() => {
         closeSuccessAlert();
-    }, 30000);
+    }, 10000);
     
     // Store timeout ID for manual close
     alertDiv.dataset.timeoutId = dismissTimeout;
