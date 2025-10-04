@@ -143,39 +143,45 @@
 
                     <!-- Radio Buttons -->
                     <div class="form-group">
-                        <label>Preferred Quote Frequency (Radio Buttons):</label>
-                        <div style="margin-top: 8px;">
-                            <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                                <input type="radio" id="daily" name="frequency" value="daily" checked style="margin-right: 8px;">
-                                <span>Daily</span>
-                            </label>
-                            <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                                <input type="radio" id="weekly" name="frequency" value="weekly" style="margin-right: 8px;">
-                                <span>Weekly</span>
-                            </label>
-                            <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                                <input type="radio" id="monthly" name="frequency" value="monthly" style="margin-right: 8px;">
-                                <span>Monthly</span>
-                            </label>
+                        <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: center;">
+                            <!-- Header Row (spans both columns) -->
+                            <div style="grid-column: 1 / -1; font-weight: 600; color: #333; margin-bottom: 5px;">
+                                Preferred Quote Frequency (Radio Buttons):
+                            </div>
+                            
+                            <!-- Row 1: Daily -->
+                            <input type="radio" id="daily" name="frequency" value="daily" checked style="margin: 0; cursor: pointer;">
+                            <label for="daily" style="margin: 0; cursor: pointer; text-align: left;">Daily</label>
+                            
+                            <!-- Row 2: Weekly -->
+                            <input type="radio" id="weekly" name="frequency" value="weekly" style="margin: 0; cursor: pointer;">
+                            <label for="weekly" style="margin: 0; cursor: pointer; text-align: left;">Weekly</label>
+                            
+                            <!-- Row 3: Monthly -->
+                            <input type="radio" id="monthly" name="frequency" value="monthly" style="margin: 0; cursor: pointer;">
+                            <label for="monthly" style="margin: 0; cursor: pointer; text-align: left;">Monthly</label>
                         </div>
                     </div>
 
                     <!-- Checkboxes -->
                     <div class="form-group">
-                        <label>Newsletter Subscriptions (Checkboxes):</label>
-                        <div style="margin-top: 8px;">
-                            <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                                <input type="checkbox" id="motivationTips" name="subscriptions" value="tips" style="margin-right: 8px;">
-                                <span>Daily Motivation Tips</span>
-                            </label>
-                            <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                                <input type="checkbox" id="successStories" name="subscriptions" value="stories" style="margin-right: 8px;">
-                                <span>Success Stories</span>
-                            </label>
-                            <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                                <input type="checkbox" id="weeklyDigest" name="subscriptions" value="digest" style="margin-right: 8px;">
-                                <span>Weekly Digest</span>
-                            </label>
+                        <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: center;">
+                            <!-- Header Row (spans both columns) -->
+                            <div style="grid-column: 1 / -1; font-weight: 600; color: #333; margin-bottom: 5px;">
+                                Newsletter Subscriptions (Checkboxes):
+                            </div>
+                            
+                            <!-- Row 1: Daily Motivation Tips -->
+                            <input type="checkbox" id="motivationTips" name="subscriptions" value="tips" style="margin: 0; cursor: pointer;">
+                            <label for="motivationTips" style="margin: 0; cursor: pointer; text-align: left;">Daily Motivation Tips</label>
+                            
+                            <!-- Row 2: Success Stories -->
+                            <input type="checkbox" id="successStories" name="subscriptions" value="stories" style="margin: 0; cursor: pointer;">
+                            <label for="successStories" style="margin: 0; cursor: pointer; text-align: left;">Success Stories</label>
+                            
+                            <!-- Row 3: Weekly Digest -->
+                            <input type="checkbox" id="weeklyDigest" name="subscriptions" value="digest" style="margin: 0; cursor: pointer;">
+                            <label for="weeklyDigest" style="margin: 0; cursor: pointer; text-align: left;">Weekly Digest</label>
                         </div>
                     </div>
 
