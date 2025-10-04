@@ -21,7 +21,9 @@ const autoFillData = {
         "Ryan Patel",
         "Olivia Brown",
         "Daniel Garcia",
-        "Sophia Anderson"
+        "Sophia Anderson",
+        "Mohammed Amin",
+        "Mohammed Shahab"
     ],
     emails: [
         "alex.johnson@motivation.com",
@@ -33,7 +35,9 @@ const autoFillData = {
         "ryan.patel@victory.com",
         "olivia.brown@excellence.com",
         "daniel.garcia@triumph.com",
-        "sophia.anderson@summit.com"
+        "sophia.anderson@summit.com",
+        "mohammed.amin@goals.com",
+        "mohammed.shahab@mentor.com"
     ],
     passwords: [
         "Inspire@2025",
@@ -45,9 +49,11 @@ const autoFillData = {
         "Summit#987",
         "Excel!234",
         "Triumph$567",
-        "Aspire&890"
+        "Aspire&890",
+        "IITJEE@2025",
+        "Mentor#2025"
     ],
-    ages: [25, 28, 32, 35, 27, 30, 29, 34, 26, 31],
+    ages: [25, 28, 32, 35, 27, 30, 29, 34, 26, 31, 17, 45],
     dates: [
         "1995-06-15",
         "1992-03-22",
@@ -58,7 +64,9 @@ const autoFillData = {
         "1991-04-12",
         "1986-08-25",
         "1994-02-14",
-        "1989-10-08"
+        "1989-10-08",
+        "2007-08-15",
+        "1979-11-20"
     ],
     times: [
         "06:00",
@@ -70,7 +78,9 @@ const autoFillData = {
         "07:00",
         "08:30",
         "09:30",
-        "10:00"
+        "10:00",
+        "05:00",
+        "06:15"
     ],
     websites: [
         "https://alexjohnson.com",
@@ -82,7 +92,9 @@ const autoFillData = {
         "https://ryanpatel.net",
         "https://oliviabrown.io",
         "https://danielgarcia.com",
-        "https://sophiaanderson.dev"
+        "https://sophiaanderson.dev",
+        "https://mohammedamin.edu",
+        "https://mohammedshahab.mentor"
     ],
     phones: [
         "+1-555-0101",
@@ -94,10 +106,12 @@ const autoFillData = {
         "+1-555-0707",
         "+1-555-0808",
         "+1-555-0909",
-        "+1-555-1010"
+        "+1-555-1010",
+        "+91-98765-43210",
+        "+91-98765-12345"
     ],
-    motivationLevels: [7, 8, 9, 10, 6, 8, 9, 7, 8, 10],
-    countries: ["us", "uk", "ca", "au", "in", "us", "ca", "uk", "au", "in"],
+    motivationLevels: [7, 8, 9, 10, 6, 8, 9, 7, 8, 10, 10, 10],
+    countries: ["us", "uk", "ca", "au", "in", "us", "ca", "uk", "au", "in", "in", "in"],
     goals: [
         "Launch my own business within the next 12 months and achieve financial independence.",
         "Complete a marathon and improve my overall fitness level by 50% this year.",
@@ -108,14 +122,21 @@ const autoFillData = {
         "Master public speaking by delivering 20 presentations to audiences of 100+.",
         "Develop leadership skills by mentoring 10 junior professionals this year.",
         "Travel to 15 countries while working remotely and documenting the journey.",
-        "Create a successful YouTube channel reaching 100K subscribers in 12 months."
-    ]
+        "Create a successful YouTube channel reaching 100K subscribers in 12 months.",
+        "Pass 12th in flying colors and clear IIT JEE Mains.",
+        "Mentor Amin to help him Pass 12th in flying colors and clear IIT JEE Mains, along with handling all the problems in life gracefully."
+    ],
+    // Special handling for Mohammed Amin - always select all topics
+    specialProfiles: {
+        10: { selectAllTopics: true }, // Mohammed Amin
+        11: { selectAllTopics: false }  // Mohammed Shahab
+    }
 };
 
 // Auto Fill Form Function
 function autoFillForm() {
-    // Get random index
-    const randomIndex = Math.floor(Math.random() * 10);
+    // Get random index (now 0-11 for 12 profiles)
+    const randomIndex = Math.floor(Math.random() * 12);
     
     // Fill basic fields
     document.getElementById('fullName').value = autoFillData.names[randomIndex];
@@ -133,7 +154,7 @@ function autoFillForm() {
     updateMotivationValue(motivationLevel);
     
     // Fill favorite color (random color)
-    const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#fa709a', '#30cfd0', '#a8edea'];
+    const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#fa709a', '#30cfd0', '#a8edea', '#11998e', '#38ef7d'];
     document.getElementById('favoriteColor').value = colors[randomIndex];
     
     // Fill country
@@ -146,15 +167,23 @@ function autoFillForm() {
     // Clear all selections first
     allOptions.forEach(option => option.selected = false);
     
-    // Randomly select how many topics to select (2, 3, 4, or all)
-    const selectionType = Math.floor(Math.random() * 4);
+    // Check if this profile has special topic selection rules
+    const isSpecialProfile = autoFillData.specialProfiles[randomIndex];
     let numToSelect;
     
-    switch(selectionType) {
-        case 0: numToSelect = 2; break;
-        case 1: numToSelect = 3; break;
-        case 2: numToSelect = 4; break;
-        case 3: numToSelect = allOptions.length; break;
+    if (isSpecialProfile && isSpecialProfile.selectAllTopics) {
+        // Mohammed Amin - always select all topics
+        numToSelect = allOptions.length;
+    } else {
+        // Randomly select how many topics to select (2, 3, 4, or all)
+        const selectionType = Math.floor(Math.random() * 4);
+        
+        switch(selectionType) {
+            case 0: numToSelect = 2; break;
+            case 1: numToSelect = 3; break;
+            case 2: numToSelect = 4; break;
+            case 3: numToSelect = allOptions.length; break;
+        }
     }
     
     // Randomly select the topics
