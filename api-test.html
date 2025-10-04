@@ -192,6 +192,13 @@
         </div>
 
         <div class="content">
+            <!-- Instructions Link -->
+            <div style="background-color: #e3f2fd; padding: 15px; margin-bottom: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #2196F3;">
+                <p style="margin: 0; font-size: 16px; color: #1976D2;">
+                    📚 For instructions on how to use this API for testing, <a href="#instructions" style="color: #0d47a1; font-weight: bold; text-decoration: none;">Click here</a>
+                </p>
+            </div>
+
             <!-- API Status Section -->
             <div class="test-section">
                 <h2>🔍 API Status</h2>
@@ -717,5 +724,167 @@
             updateOutput('errorOutput', JSON.stringify(data, null, 2));
         }
     </script>
+
+    <!-- Instructions Section -->
+    <div id="instructions" class="content" style="background-color: #f8f9fa; border-top: 3px solid #007bff; padding: 40px 30px; margin-top: 20px;">
+        <h2 style="color: #007bff; margin-top: 0; font-size: 2rem; text-align: center;">📚 How to Use This Mock API for Testing</h2>
+        
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <p style="line-height: 1.8; color: #333; font-size: 16px; margin-bottom: 25px;">
+                This page provides a <strong>client-side Service Worker-based Mock API</strong> designed for QA automation testing practice. 
+                Use this environment to test API workflows with tools like <strong>Playwright, Selenium, Karate Framework, REST Assured, Postman, or curl</strong>.
+            </p>
+
+            <h3 style="color: #495057; margin-top: 30px; font-size: 1.5rem; border-bottom: 2px solid #dee2e6; padding-bottom: 10px;">🔐 Complete Authentication Flow:</h3>
+            <ol style="line-height: 2; color: #333; font-size: 15px; padding-left: 25px;">
+                <li style="margin-bottom: 15px;">
+                    <strong>Get Authentication Token:</strong> Click "Generate Auth Token" or call <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; color: #e83e8c;">GET /api/token</code> to receive a bearer token. This token is required for all subsequent authenticated requests.
+                </li>
+                
+                <li style="margin-bottom: 15px;">
+                    <strong>Store the Token:</strong> Copy the token from the response. In your automation scripts, store this token in a variable or header for future requests.
+                </li>
+                
+                <li style="margin-bottom: 15px;">
+                    <strong>Login with Token:</strong> Use the token in the Authorization header when calling <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; color: #e83e8c;">POST /api/login</code>. Include user credentials in the request body (username/password).
+                </li>
+                
+                <li style="margin-bottom: 15px;">
+                    <strong>Receive Session Token:</strong> Upon successful login, you'll receive a session token. Use this session token for accessing protected endpoints like quote management or profile updates.
+                </li>
+            </ol>
+
+            <h3 style="color: #495057; margin-top: 30px; font-size: 1.5rem; border-bottom: 2px solid #dee2e6; padding-bottom: 10px;">🎯 Example Test Scenarios:</h3>
+            <ul style="line-height: 2; color: #333; font-size: 15px; padding-left: 25px;">
+                <li style="margin-bottom: 10px;"><strong>API Authentication Flow:</strong> Test the complete token → login → session workflow</li>
+                <li style="margin-bottom: 10px;"><strong>Data Retrieval:</strong> Fetch quotes, random quotes, or user profile information</li>
+                <li style="margin-bottom: 10px;"><strong>Error Handling:</strong> Test various HTTP status codes (404, 500, 401, 403, 429) using the test endpoints</li>
+                <li style="margin-bottom: 10px;"><strong>Response Validation:</strong> Verify JSON structure, status codes, and response times</li>
+                <li style="margin-bottom: 10px;"><strong>Header Management:</strong> Practice sending Authorization headers with Bearer tokens</li>
+            </ul>
+
+            <h3 style="color: #495057; margin-top: 30px; font-size: 1.5rem; border-bottom: 2px solid #dee2e6; padding-bottom: 10px;">🔧 Using with Automation Tools:</h3>
+            
+            <div style="background-color: #fff; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #dee2e6;">
+                <p style="margin: 0 0 15px 0; color: #333; font-weight: bold; font-size: 16px;">Playwright Example:</p>
+                <pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.5;">// Get token
+const tokenResponse = await page.request.get('/api/token');
+const token = (await tokenResponse.json()).data.token;
+
+// Login with token
+const loginResponse = await page.request.post('/api/login', {
+    headers: { 'Authorization': `Bearer ${token}` },
+    data: { username: 'demo_user', password: 'password123' }
+});
+
+// Access protected endpoint
+const sessionToken = (await loginResponse.json()).data.sessionToken;
+const quotesResponse = await page.request.get('/api/quotes', {
+    headers: { 'Authorization': `Bearer ${sessionToken}` }
+});</pre>
+
+                <p style="margin: 25px 0 15px 0; color: #333; font-weight: bold; font-size: 16px;">curl Example:</p>
+                <pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.5;"># Step 1: Get token
+curl https://shahabname.github.io/ShahabMotivationWorld/api/token
+
+# Step 2: Login (replace YOUR_TOKEN with actual token)
+curl -X POST https://shahabname.github.io/ShahabMotivationWorld/api/login \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"username":"demo_user","password":"password123"}'
+
+# Step 3: Access protected resources (replace YOUR_SESSION_TOKEN)
+curl https://shahabname.github.io/ShahabMotivationWorld/api/quotes \
+  -H "Authorization: Bearer YOUR_SESSION_TOKEN"</pre>
+
+                <p style="margin: 25px 0 15px 0; color: #333; font-weight: bold; font-size: 16px;">Karate Framework Example:</p>
+                <pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.5;">Feature: Mock API Authentication Flow
+
+Scenario: Complete login flow
+  # Get authentication token
+  Given url 'https://shahabname.github.io/ShahabMotivationWorld/api/token'
+  When method get
+  Then status 200
+  And def authToken = response.data.token
+  
+  # Login with token
+  Given url 'https://shahabname.github.io/ShahabMotivationWorld/api/login'
+  And header Authorization = 'Bearer ' + authToken
+  And request { username: 'demo_user', password: 'password123' }
+  When method post
+  Then status 200
+  And def sessionToken = response.data.sessionToken
+  
+  # Get quotes with session token
+  Given url 'https://shahabname.github.io/ShahabMotivationWorld/api/quotes'
+  And header Authorization = 'Bearer ' + sessionToken
+  When method get
+  Then status 200</pre>
+            </div>
+
+            <h3 style="color: #495057; margin-top: 30px; font-size: 1.5rem; border-bottom: 2px solid #dee2e6; padding-bottom: 10px;">💡 Best Practices for Testing:</h3>
+            <ul style="line-height: 2; color: #333; font-size: 15px; padding-left: 25px;">
+                <li style="margin-bottom: 10px;">Always check the API status first using the "Check API Status" button to ensure the Service Worker is active</li>
+                <li style="margin-bottom: 10px;">Tokens have a 6-hour expiry - request a new token if you receive authentication errors</li>
+                <li style="margin-bottom: 10px;">Use the interactive buttons above to understand API responses before writing automation scripts</li>
+                <li style="margin-bottom: 10px;">Review the Response section to see the exact JSON structure returned by each endpoint</li>
+                <li style="margin-bottom: 10px;">Test error scenarios using the dedicated error simulation endpoints (404, 500, 401, etc.)</li>
+                <li style="margin-bottom: 10px;">Practice both positive and negative test cases to validate error handling in your scripts</li>
+            </ul>
+
+            <h3 style="color: #495057; margin-top: 30px; font-size: 1.5rem; border-bottom: 2px solid #dee2e6; padding-bottom: 10px;">📋 Available API Endpoints:</h3>
+            <div style="background-color: #fff; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #dee2e6;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: #f8f9fa;">
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; color: #495057;">Method</th>
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; color: #495057;">Endpoint</th>
+                            <th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6; color: #495057;">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; color: #0066cc;">GET</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/api/token</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Generate authentication token</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #fff3cd; padding: 3px 8px; border-radius: 3px; color: #856404;">POST</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/api/login</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Login with credentials (requires auth token)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; color: #0066cc;">GET</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/api/quotes</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Retrieve all quotes</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; color: #0066cc;">GET</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/api/getrandomquote</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Get a random motivational quote</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; color: #0066cc;">GET</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/api/status</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Check API operational status</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="background-color: #fff3cd; border: 2px solid #ffc107; padding: 20px; border-radius: 8px; margin-top: 30px;">
+                <p style="margin: 0; color: #856404; font-size: 15px; line-height: 1.8;">
+                    <strong>⚠️ Important Note:</strong> This is a <strong>client-side mock API</strong> using Service Workers. 
+                    All data is stored in your browser's IndexedDB and will reset every 6 hours or when you clear browser data. 
+                    This environment is perfect for learning, practicing, and demonstrating automation testing skills, but it is not suitable for production use.
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #dee2e6;">
+                <a href="#" style="color: #007bff; text-decoration: none; font-size: 16px; font-weight: bold;">⬆️ Back to Top</a>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
