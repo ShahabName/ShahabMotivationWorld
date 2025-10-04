@@ -94,11 +94,46 @@
             line-height: 1.6;
         }
 
+        /* Make code blocks positionable so the copy button can be placed at top-right */
+        .code-block { position: relative; }
+
+        /* Preserve whitespace and line breaks in code elements */
         .code-block code {
-            color: #abb2bf;
             white-space: pre-wrap;
+            word-wrap: break-word;
             display: block;
         }
+
+        /* Copy button shown on top-right of code blocks */
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            border: none;
+            padding: 6px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+            transition: background 0.18s ease, transform 0.12s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(0,0,0,0.8);
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #28a745; /* green on success */
+            color: white;
+        }
+
+        .copy-btn i { font-size: 12px; }
 
         .response-block {
             background-color: #f8f9fa;
@@ -1405,5 +1440,65 @@ mvn test</code>
 
     <script src="js/language-switcher.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Attach copy buttons to every .code-block on the page
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                // Avoid adding multiple buttons if script runs twice
+                if (block.querySelector('.copy-btn')) return;
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'copy-btn';
+                btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+
+                btn.addEventListener('click', async function() {
+                    // Find code child(s) and collect text
+                    const codeEls = block.querySelectorAll('code');
+                    let text = '';
+                    if (codeEls.length) {
+                        text = Array.from(codeEls).map(c => c.innerText).join('\n');
+                    } else {
+                        text = block.innerText;
+                    }
+
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        btn.classList.add('copied');
+                        const original = btn.innerHTML;
+                        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        setTimeout(() => {
+                            btn.classList.remove('copied');
+                            btn.innerHTML = original;
+                        }, 1800);
+                    } catch (err) {
+                        // Fallback method
+                        const ta = document.createElement('textarea');
+                        ta.value = text;
+                        ta.style.position = 'fixed';
+                        ta.style.left = '-9999px';
+                        document.body.appendChild(ta);
+                        ta.select();
+                        try {
+                            document.execCommand('copy');
+                            btn.classList.add('copied');
+                            const original = btn.innerHTML;
+                            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                            setTimeout(() => {
+                                btn.classList.remove('copied');
+                                btn.innerHTML = original;
+                            }, 1800);
+                        } catch (e) {
+                            alert('Copy failed: ' + e);
+                        }
+                        ta.remove();
+                    }
+                });
+
+                block.appendChild(btn);
+            });
+        });
+    </script>
 </body>
 </html>
