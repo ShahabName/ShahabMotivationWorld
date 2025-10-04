@@ -1042,7 +1042,19 @@ Scenario: Verify randomness - call multiple times
                 <!-- Complete Workflow -->
                 <div id="workflow" class="feature-section">
                     <h2>🔄 Complete Authentication Workflow</h2>
-                    <p>Step-by-step example of the full authentication flow from token generation to accessing protected resources.</p>
+                    <p>
+                        Step-by-step example of the full authentication flow from token generation to accessing protected resources.
+                    </p>
+                    <p>
+                        This section demonstrates how to:
+                    </p>
+                    <ul style="margin-bottom: 20px;">
+                        <li>Check API status</li>
+                        <li>Generate authentication token</li>
+                        <li>Login with credentials</li>
+                        <li>Access protected endpoints</li>
+                        <li>Retrieve data from the API</li>
+                    </ul>
 
                     <h3><i class="fas fa-code"></i> Complete Playwright Example</h3>
                     <div class="code-block">
@@ -1272,16 +1284,26 @@ Scenario: End-to-end API testing workflow
                 <!-- Tool Setup Guide -->
                 <div id="tools" class="feature-section">
                     <h2>🛠️ Tool Setup Guide</h2>
+                    <p>
+                        This section provides step-by-step installation and configuration instructions for each testing tool.
+                    </p>
+                    <p>
+                        Choose your preferred automation framework and follow the setup guide below:
+                    </p>
                     
                     <h3><i class="fas fa-paper-plane"></i> Postman Setup</h3>
                     <div class="code-block">
 <code>1. Download Postman from https://www.postman.com/downloads/
+
 2. Create a new Collection: "ShahabMotivationWorld API"
+
 3. Add environment variables:
    - baseUrl: https://shahabname.github.io/ShahabMotivationWorld
    - authToken: (will be set dynamically)
    - sessionToken: (will be set dynamically)
+
 4. Import requests from this tutorial
+
 5. Use Tests tab to extract and save tokens:
    pm.environment.set("authToken", pm.response.json().data.token);</code>
                     </div>
