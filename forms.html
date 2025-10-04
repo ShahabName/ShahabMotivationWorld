@@ -30,7 +30,7 @@
         <main class="main-content">
             <header>
                 <h1>HTML Form Elements Showcase</h1>
-                <p>Explore all HTML form elements with motivational examples</p>
+                <p>Create your account and join Shahab's Motivational Community</p>
             </header>
 
             <!-- Auto Fill Button -->
@@ -38,6 +38,9 @@
                 <button type="button" class="btn" onclick="autoFillForm()" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); font-size: 18px; padding: 12px 30px;">
                     <i class="fas fa-magic"></i> Auto Fill Form
                 </button>
+                <p style="margin: 8px 0 0 0; font-size: 13px; color: #ffffff; font-style: italic; opacity: 0.9;">
+                    💡 Tip: Click multiple times to cycle through different demo users
+                </p>
             </div>
 
             <div class="form-container">
@@ -189,6 +192,49 @@
                     <div class="form-group">
                         <label for="goals">Your Goals (Textarea):</label>
                         <textarea id="goals" name="goals" rows="4" placeholder="Describe your goals and dreams..."></textarea>
+                    </div>
+
+                    <!-- Post-Form Submit Action -->
+                    <div class="form-group">
+                        <div style="display: grid; grid-template-columns: auto 1fr; gap: 8px; align-items: center;">
+                            <!-- Header Row (spans both columns) -->
+                            <div style="grid-column: 1 / -1; font-weight: 600; color: #333; margin-bottom: 5px;">
+                                Post-Form Submit Action:
+                            </div>
+                            
+                            <!-- Row 1: Redirect to confirmation page (Default) -->
+                            <input type="radio" id="actionRedirect" name="submitAction" value="redirect" checked style="margin: 0; cursor: pointer;">
+                            <label for="actionRedirect" style="margin: 0; cursor: pointer; text-align: left;">Submit and show confirmation page</label>
+                            
+                            <!-- Row 2: Auto-dismiss alert with duration input -->
+                            <input type="radio" id="actionAutoDismiss" name="submitAction" value="autoDismiss" style="margin: 0; cursor: pointer;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <label for="actionAutoDismiss" style="margin: 0; cursor: pointer; text-align: left;">Submit and show auto-dismiss alert on same page</label>
+                                <span id="durationInputContainer" style="display: none;">
+                                    Duration: <input type="number" id="dismissDuration" min="1" max="60" value="10" style="width: 60px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;"> seconds
+                                </span>
+                            </div>
+                            
+                            <!-- Row 3: Show modal popup -->
+                            <input type="radio" id="actionModal" name="submitAction" value="modal" style="margin: 0; cursor: pointer;">
+                            <label for="actionModal" style="margin: 0; cursor: pointer; text-align: left;">Show modal popup with form summary</label>
+                            
+                            <!-- Row 4: Download as file -->
+                            <input type="radio" id="actionDownload" name="submitAction" value="download" style="margin: 0; cursor: pointer;">
+                            <label for="actionDownload" style="margin: 0; cursor: pointer; text-align: left;">Download form data as text file</label>
+                            
+                            <!-- Row 5: Copy to clipboard -->
+                            <input type="radio" id="actionClipboard" name="submitAction" value="clipboard" style="margin: 0; cursor: pointer;">
+                            <label for="actionClipboard" style="margin: 0; cursor: pointer; text-align: left;">Copy form data to clipboard</label>
+                            
+                            <!-- Row 6: Print -->
+                            <input type="radio" id="actionPrint" name="submitAction" value="print" style="margin: 0; cursor: pointer;">
+                            <label for="actionPrint" style="margin: 0; cursor: pointer; text-align: left;">Print form data</label>
+                            
+                            <!-- Row 7: Animated success -->
+                            <input type="radio" id="actionAnimated" name="submitAction" value="animated" style="margin: 0; cursor: pointer;">
+                            <label for="actionAnimated" style="margin: 0; cursor: pointer; text-align: left;">Show animated success steps</label>
+                        </div>
                     </div>
 
                     <!-- Hidden Input -->

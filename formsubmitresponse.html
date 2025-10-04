@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission Success - Shahab's Motivations</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Navigation Menu -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h2><i class="fas fa-heart"></i> Motivations</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li><a href="tabs.html"><i class="fas fa-folder"></i> Quotes Tabs</a></li>
+                <li><a href="sports.html"><i class="fas fa-basketball-ball"></i> Sports Quiz</a></li>
+                <li><a href="navigation.html"><i class="fas fa-compass"></i> Multi-Nav</a></li>
+                <li><a href="forms.html" class="active"><i class="fas fa-wpforms"></i> HTML Forms</a></li>
+                <li><a href="forms-detailed.html"><i class="fas fa-code"></i> Forms Code</a></li>
+                <li><a href="api-test.html"><i class="fas fa-server"></i> Client Side API</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1><i class="fas fa-check-circle"></i> Form Submitted Successfully!</h1>
+                <p>Thank you for your submission</p>
+            </header>
+
+            <div class="form-container">
+                <div class="quote-container">
+                    <blockquote>"Every accomplishment starts with the decision to try."</blockquote>
+                    <cite>- John F. Kennedy</cite>
+                </div>
+
+                <div style="background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%); padding: 30px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <h2 style="color: #155724; margin-top: 0;">
+                        <i class="fas fa-user-check"></i> Account Created Successfully!
+                    </h2>
+                    <p style="font-size: 18px; color: #155724; margin: 20px 0;">
+                        Your account has been created. Here are your login credentials:
+                    </p>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <p style="font-size: 16px; margin: 10px 0;">
+                            <strong><i class="fas fa-envelope"></i> Login Email:</strong> 
+                            <span id="loginEmail" style="color: #667eea; font-weight: bold;"></span>
+                        </p>
+                        <p style="font-size: 16px; margin: 10px 0;">
+                            <strong><i class="fas fa-key"></i> Password:</strong> 
+                            <span id="loginPassword" style="color: #667eea; font-weight: bold;"></span>
+                        </p>
+                    </div>
+                    
+                    <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                        <p style="color: #856404; margin: 0;">
+                            <i class="fas fa-exclamation-triangle"></i> 
+                            <strong>Demo Notice:</strong> This password is displayed for demonstration and testing purposes only. 
+                            In a real application, passwords should NEVER be displayed or transmitted insecurely.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <h3 style="color: #667eea; margin-top: 0;">
+                        <i class="fas fa-clipboard-list"></i> Your Submitted Information:
+                    </h3>
+                    <div id="submittedData" style="background: #f8f9fa; padding: 20px; border-radius: 10px;">
+                        <!-- Data will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="forms.html" class="btn" style="display: inline-block; text-decoration: none; padding: 15px 30px; font-size: 18px;">
+                        <i class="fas fa-arrow-left"></i> Back to Form
+                    </a>
+                    <a href="index.html" class="btn" style="display: inline-block; text-decoration: none; padding: 15px 30px; font-size: 18px; margin-left: 10px; background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                        <i class="fas fa-home"></i> Go to Home
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Disclaimer Footer -->
+    <footer class="disclaimer">
+        <div class="disclaimer-content">
+            <p><strong>Disclaimer:</strong> Created for educational purposes. Use at your own risk.</p>
+        </div>
+    </footer>
+
+    <script src="js/language-switcher.js"></script>
+    <script>
+        // Read form data from sessionStorage (more secure than URL params)
+        document.addEventListener('DOMContentLoaded', function() {
+            const dataDiv = document.getElementById('submittedData');
+            const loginEmailSpan = document.getElementById('loginEmail');
+            const loginPasswordSpan = document.getElementById('loginPassword');
+            
+            // Retrieve data from sessionStorage
+            const storedData = sessionStorage.getItem('formSubmissionData');
+            
+            if (!storedData) {
+                // Fallback: try reading from URL params (backward compatibility)
+                readFromURLParams();
+                return;
+            }
+            
+            const data = JSON.parse(storedData);
+            
+            // Clear sessionStorage after reading (security)
+            sessionStorage.removeItem('formSubmissionData');
+            
+            let dataHtml = '';
+            let email = '';
+            let password = '';
+            
+            // Fields to skip in the main data display
+            const skipFields = ['formSource', 'submitAction', 'profilePic'];
+            
+            for (let key in data) {
+                if (skipFields.includes(key)) continue;
+                
+                const value = Array.isArray(data[key]) ? data[key].join(', ') : data[key];
+                
+                // Capture email and password for login credentials
+                if (key === 'email') {
+                    email = value;
+                }
+                if (key === 'password') {
+                    password = value;
+                }
+                
+                // Format the key for display
+                let displayKey = key.charAt(0).toUpperCase() + key.slice(1);
+                displayKey = displayKey.replace(/([A-Z])/g, ' $1').trim();
+                
+                // Display the field
+                dataHtml += `
+                    <div style="padding: 12px; margin: 8px 0; background: white; border-radius: 8px; border-left: 4px solid #667eea;">
+                        <strong style="color: #667eea;">${displayKey}:</strong> 
+                        <span style="color: #333;">${value || 'Not provided'}</span>
+                    </div>
+                `;
+            }
+            
+            // Display login credentials
+            loginEmailSpan.textContent = email || 'Not provided';
+            loginPasswordSpan.textContent = password || 'Not provided';
+            
+            // Display all data
+            if (dataHtml) {
+                dataDiv.innerHTML = dataHtml;
+            } else {
+                dataDiv.innerHTML = '<p style="color: #999; text-align: center;">No data submitted</p>';
+            }
+            
+            // Add confetti celebration
+            setTimeout(triggerConfetti, 300);
+        });
+        
+        // Fallback function for URL params (backward compatibility)
+        function readFromURLParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataDiv = document.getElementById('submittedData');
+            const loginEmailSpan = document.getElementById('loginEmail');
+            const loginPasswordSpan = document.getElementById('loginPassword');
+            
+            let dataHtml = '';
+            let email = '';
+            let password = '';
+            
+            const skipFields = ['formSource', 'submitAction', 'profilePic'];
+            
+            for (let [key, value] of urlParams.entries()) {
+                if (skipFields.includes(key)) continue;
+                
+                if (key === 'email') email = value;
+                if (key === 'password') password = value;
+                
+                let displayKey = key.charAt(0).toUpperCase() + key.slice(1);
+                displayKey = displayKey.replace(/([A-Z])/g, ' $1').trim();
+                
+                dataHtml += `
+                    <div style="padding: 12px; margin: 8px 0; background: white; border-radius: 8px; border-left: 4px solid #667eea;">
+                        <strong style="color: #667eea;">${displayKey}:</strong> 
+                        <span style="color: #333;">${value || 'Not provided'}</span>
+                    </div>
+                `;
+            }
+            
+            loginEmailSpan.textContent = email || 'Not provided';
+            loginPasswordSpan.textContent = password || 'Not provided';
+            
+            if (dataHtml) {
+                dataDiv.innerHTML = dataHtml;
+            } else {
+                dataDiv.innerHTML = '<p style="color: #999; text-align: center;">No data submitted</p>';
+            }
+            
+            setTimeout(triggerConfetti, 300);
+        }
+        
+        // Confetti animation
+        function triggerConfetti() {
+            const duration = 3 * 1000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10000 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+
+                // Create confetti particles
+                for (let i = 0; i < particleCount; i++) {
+                    createConfettiParticle(
+                        randomInRange(0.1, 0.9),
+                        randomInRange(0.1, 0.9)
+                    );
+                }
+            }, 250);
+        }
+
+        function createConfettiParticle(x, y) {
+            const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#fa709a'];
+            const particle = document.createElement('div');
+            
+            particle.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: ${colors[Math.floor(Math.random() * colors.length)]};
+                left: ${x * 100}%;
+                top: ${y * 100}%;
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+                pointer-events: none;
+                z-index: 9999;
+                border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+            `;
+            
+            document.body.appendChild(particle);
+            
+            const angle = Math.random() * 360;
+            const velocity = Math.random() * 500 + 200;
+            const rotation = Math.random() * 720 - 360;
+            
+            particle.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(${velocity}px) translateX(${Math.cos(angle) * velocity}px) rotate(${rotation}deg)`, opacity: 0 }
+            ], {
+                duration: 3000,
+                easing: 'cubic-bezier(0, 0.9, 0.57, 1)'
+            }).onfinish = () => particle.remove();
+        }
+    </script>
+</body>
+</html>

@@ -298,48 +298,46 @@ function handleSubmit(event) {
     
     // Collect all form data
     for (let [key, value] of formData.entries()) {
-        if (data[key]) {
-            // Handle multiple values (like checkboxes)
-            if (Array.isArray(data[key])) {
-                data[key].push(value);
-            } else {
-                data[key] = [data[key], value];
+        if (key === 'interests' || key === 'subscriptions') {
+            // Handle multiple select and checkboxes
+            if (!data[key]) {
+                data[key] = [];
             }
+            data[key].push(value);
         } else {
             data[key] = value;
         }
     }
     
-    // Display success message
-    const resultDiv = document.getElementById('formResult');
-    const dataDiv = document.getElementById('submittedData');
+    // Get selected submit action
+    const submitAction = document.querySelector('input[name="submitAction"]:checked').value;
     
-    let dataHtml = '<h4>Submitted Information:</h4><ul>';
-    
-    for (let [key, value] of Object.entries(data)) {
-        if (key === 'formSource') continue; // Skip hidden field
-        
-        let displayKey = key.charAt(0).toUpperCase() + key.slice(1);
-        displayKey = displayKey.replace(/([A-Z])/g, ' $1').trim();
-        
-        if (Array.isArray(value)) {
-            dataHtml += `<li><strong>${displayKey}:</strong> ${value.join(', ')}</li>`;
-        } else {
-            dataHtml += `<li><strong>${displayKey}:</strong> ${value}</li>`;
-        }
+    // Execute the selected action
+    switch(submitAction) {
+        case 'redirect':
+            redirectToConfirmation(data);
+            break;
+        case 'autoDismiss':
+            showAutoDismissAlert(data);
+            break;
+        case 'modal':
+            showModalPopup(data);
+            break;
+        case 'download':
+            downloadFormData(data);
+            break;
+        case 'clipboard':
+            copyToClipboard(data);
+            break;
+        case 'print':
+            printFormData(data);
+            break;
+        case 'animated':
+            showAnimatedSuccess(data);
+            break;
+        default:
+            redirectToConfirmation(data);
     }
-    
-    dataHtml += '</ul>';
-    dataDiv.innerHTML = dataHtml;
-    
-    resultDiv.classList.remove('hidden');
-    resultDiv.scrollIntoView({ behavior: 'smooth' });
-    
-    // Add celebration animation
-    confetti();
-    
-    // Show success alert for 30 seconds
-    showSuccessAlert();
 }
 
 // Show success alert that auto-dismisses after 30 seconds
@@ -612,3 +610,513 @@ validationStyle.textContent = `
     }
 `;
 document.head.appendChild(validationStyle);
+
+// ==================== POST-FORM SUBMIT ACTION HANDLERS ====================
+
+// Toggle duration input visibility
+function toggleDurationInput() {
+    const autoDismissRadio = document.getElementById('actionAutoDismiss');
+    const durationContainer = document.getElementById('durationInputContainer');
+    
+    if (autoDismissRadio && autoDismissRadio.checked) {
+        durationContainer.style.display = 'inline';
+    } else {
+        durationContainer.style.display = 'none';
+    }
+}
+
+// Add event listeners when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const submitActionRadios = document.querySelectorAll('input[name="submitAction"]');
+    submitActionRadios.forEach(radio => {
+        radio.addEventListener('change', toggleDurationInput);
+    });
+});
+
+// Action 1: Redirect to confirmation page with URL parameters
+function redirectToConfirmation(data) {
+    // Store form data in sessionStorage (secure, temporary)
+    sessionStorage.setItem('formSubmissionData', JSON.stringify(data));
+    
+    // Redirect to clean URL (no query parameters)
+    window.location.href = 'formsubmitresponse.html';
+}
+
+// Action 2: Auto-dismiss alert
+function showAutoDismissAlert(data) {
+    const durationInput = document.getElementById('dismissDuration');
+    const duration = durationInput ? parseInt(durationInput.value) * 1000 : 10000;
+    
+    // Display success message
+    const resultDiv = document.getElementById('formResult');
+    const dataDiv = document.getElementById('submittedData');
+    
+    let dataHtml = '<h4>Submitted Information:</h4><ul>';
+    
+    for (let key in data) {
+        if (key === 'formSource' || key === 'submitAction') continue;
+        
+        let displayKey = key.charAt(0).toUpperCase() + key.slice(1);
+        displayKey = displayKey.replace(/([A-Z])/g, ' $1').trim();
+        
+        const value = Array.isArray(data[key]) ? data[key].join(', ') : data[key];
+        dataHtml += `<li><strong>${displayKey}:</strong> ${value}</li>`;
+    }
+    
+    dataHtml += '</ul>';
+    dataDiv.innerHTML = dataHtml;
+    
+    resultDiv.classList.remove('hidden');
+    resultDiv.scrollIntoView({ behavior: 'smooth' });
+    
+    // Trigger confetti
+    confetti();
+    
+    // Show success alert with custom duration
+    showSuccessAlertWithDuration(duration);
+}
+
+// Modified showSuccessAlert to accept duration
+function showSuccessAlertWithDuration(duration) {
+    // Create alert element
+    const alertDiv = document.createElement('div');
+    alertDiv.id = 'success-alert';
+    alertDiv.className = 'success-alert';
+    alertDiv.innerHTML = `
+        <div class="success-alert-content">
+            <i class="fas fa-check-circle"></i>
+            <div class="alert-text">
+                <strong>Success!</strong>
+                <p>Your form has been submitted successfully!</p>
+            </div>
+            <button class="alert-close" onclick="closeSuccessAlert()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="alert-progress-bar"></div>
+    `;
+    
+    document.body.appendChild(alertDiv);
+    
+    // Trigger animation
+    setTimeout(() => {
+        alertDiv.classList.add('show');
+    }, 10);
+    
+    // Start progress bar animation
+    const progressBar = alertDiv.querySelector('.alert-progress-bar');
+    const durationSeconds = duration / 1000;
+    progressBar.style.animation = `progressBarAnimation ${durationSeconds}s linear forwards`;
+    
+    // Auto-dismiss after specified duration
+    const dismissTimeout = setTimeout(() => {
+        closeSuccessAlert();
+    }, duration);
+    
+    // Store timeout ID for manual close
+    alertDiv.dataset.timeoutId = dismissTimeout;
+}
+
+// Action 3: Show modal popup
+function showModalPopup(data) {
+    // Create modal overlay
+    const modal = document.createElement('div');
+    modal.id = 'formModal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10001;
+        animation: fadeIn 0.3s ease;
+    `;
+    
+    // Create modal content
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        max-width: 600px;
+        max-height: 80vh;
+        overflow-y: auto;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+        animation: slideIn 0.3s ease;
+    `;
+    
+    let contentHTML = `
+        <h2 style="color: #667eea; margin-top: 0;">
+            <i class="fas fa-check-circle"></i> Form Submitted Successfully!
+        </h2>
+        <p style="color: #666; margin-bottom: 20px;">"Every accomplishment starts with the decision to try." - John F. Kennedy</p>
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+            <h3 style="color: #333; margin-top: 0;">Submitted Data:</h3>
+    `;
+    
+    for (let key in data) {
+        if (key !== 'formSource' && key !== 'submitAction') {
+            const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+            const value = Array.isArray(data[key]) ? data[key].join(', ') : data[key];
+            contentHTML += `<p style="margin: 10px 0;"><strong>${label}:</strong> ${value || 'Not provided'}</p>`;
+        }
+    }
+    
+    contentHTML += `
+        </div>
+        <button onclick="closeModal()" style="
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="fas fa-times"></i> Close
+        </button>
+    `;
+    
+    modalContent.innerHTML = contentHTML;
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+    
+    // Trigger confetti
+    confetti();
+    
+    // Add fadeIn and slideIn animations
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+function closeModal() {
+    const modal = document.getElementById('formModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+// Action 4: Download as text file
+function downloadFormData(data) {
+    let content = '=== FORM SUBMISSION DATA ===\n\n';
+    content += `Submitted on: ${new Date().toLocaleString()}\n\n`;
+    
+    for (let key in data) {
+        if (key !== 'formSource' && key !== 'submitAction') {
+            const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+            const value = Array.isArray(data[key]) ? data[key].join(', ') : data[key];
+            content += `${label}: ${value || 'Not provided'}\n`;
+        }
+    }
+    
+    content += '\n=== END OF SUBMISSION ===';
+    
+    // Create blob and download
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `form-submission-${Date.now()}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    // Trigger confetti
+    confetti();
+    
+    // Show success alert
+    showSuccessAlertWithDuration(5000);
+}
+
+// Action 5: Copy to clipboard
+function copyToClipboard(data) {
+    let content = '=== FORM SUBMISSION DATA ===\n\n';
+    content += `Submitted on: ${new Date().toLocaleString()}\n\n`;
+    
+    for (let key in data) {
+        if (key !== 'formSource' && key !== 'submitAction') {
+            const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+            const value = Array.isArray(data[key]) ? data[key].join(', ') : data[key];
+            content += `${label}: ${value || 'Not provided'}\n`;
+        }
+    }
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(content).then(() => {
+        confetti();
+        showSuccessAlertWithDuration(5000);
+        
+        // Show clipboard success message
+        const clipboardMsg = document.createElement('div');
+        clipboardMsg.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #28a745;
+            color: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            z-index: 10002;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        `;
+        clipboardMsg.innerHTML = '<i class="fas fa-clipboard-check"></i> Copied to clipboard!';
+        document.body.appendChild(clipboardMsg);
+        
+        setTimeout(() => {
+            clipboardMsg.remove();
+        }, 2000);
+    }).catch(err => {
+        alert('❌ Failed to copy to clipboard: ' + err);
+    });
+}
+
+// Action 6: Print form data
+function printFormData(data) {
+    // Create a new window for printing
+    const printWindow = window.open('', '_blank');
+    
+    let printContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Form Submission - Print</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 40px;
+                    max-width: 800px;
+                    margin: 0 auto;
+                }
+                h1 {
+                    color: #667eea;
+                    border-bottom: 3px solid #667eea;
+                    padding-bottom: 10px;
+                }
+                .info {
+                    background: #f8f9fa;
+                    padding: 20px;
+                    border-radius: 8px;
+                    margin: 20px 0;
+                }
+                .field {
+                    margin: 15px 0;
+                    padding: 10px;
+                    border-bottom: 1px solid #ddd;
+                }
+                .label {
+                    font-weight: bold;
+                    color: #333;
+                    display: inline-block;
+                    width: 200px;
+                }
+                .value {
+                    color: #666;
+                }
+                .footer {
+                    margin-top: 40px;
+                    text-align: center;
+                    color: #999;
+                    font-size: 12px;
+                }
+                @media print {
+                    button { display: none; }
+                }
+            </style>
+        </head>
+        <body>
+            <h1>📋 Form Submission Data</h1>
+            <p><strong>Submitted on:</strong> ${new Date().toLocaleString()}</p>
+            <div class="info">
+    `;
+    
+    for (let key in data) {
+        if (key !== 'formSource' && key !== 'submitAction') {
+            const label = key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+            const value = Array.isArray(data[key]) ? data[key].join(', ') : data[key];
+            printContent += `
+                <div class="field">
+                    <span class="label">${label}:</span>
+                    <span class="value">${value || 'Not provided'}</span>
+                </div>
+            `;
+        }
+    }
+    
+    printContent += `
+            </div>
+            <div class="footer">
+                <p>Shahab's Motivations - Form Submission</p>
+                <p>Created for educational purposes</p>
+            </div>
+            <button onclick="window.print()" style="
+                background: #667eea;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin: 20px 0;
+            ">Print This Page</button>
+        </body>
+        </html>
+    `;
+    
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+    
+    // Trigger confetti
+    confetti();
+    
+    // Auto-print after a short delay
+    setTimeout(() => {
+        printWindow.print();
+    }, 500);
+}
+
+// Action 7: Animated success steps
+function showAnimatedSuccess(data) {
+    // Create animated success overlay
+    const overlay = document.createElement('div');
+    overlay.id = 'animatedSuccess';
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10003;
+        animation: fadeIn 0.5s ease;
+    `;
+    
+    const container = document.createElement('div');
+    container.style.cssText = `
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        max-width: 500px;
+        text-align: center;
+    `;
+    
+    container.innerHTML = `
+        <h2 style="color: #667eea; margin-bottom: 30px;">Processing Your Submission...</h2>
+        <div id="step1" class="step" style="padding: 15px; margin: 10px 0; border-radius: 8px; background: #f8f9fa; opacity: 0; transform: translateX(-20px); transition: all 0.5s;">
+            <i class="fas fa-check-circle" style="color: #28a745; font-size: 24px;"></i>
+            <span style="margin-left: 10px; font-size: 18px;">Data Validated</span>
+        </div>
+        <div id="step2" class="step" style="padding: 15px; margin: 10px 0; border-radius: 8px; background: #f8f9fa; opacity: 0; transform: translateX(-20px); transition: all 0.5s;">
+            <i class="fas fa-cog fa-spin" style="color: #667eea; font-size: 24px;"></i>
+            <span style="margin-left: 10px; font-size: 18px;">Processing...</span>
+        </div>
+        <div id="step3" class="step" style="padding: 15px; margin: 10px 0; border-radius: 8px; background: #f8f9fa; opacity: 0; transform: translateX(-20px); transition: all 0.5s;">
+            <i class="fas fa-database" style="color: #17a2b8; font-size: 24px;"></i>
+            <span style="margin-left: 10px; font-size: 18px;">Saving Data...</span>
+        </div>
+        <div id="step4" class="step" style="padding: 15px; margin: 10px 0; border-radius: 8px; background: #f8f9fa; opacity: 0; transform: translateX(-20px); transition: all 0.5s;">
+            <i class="fas fa-check-double" style="color: #28a745; font-size: 24px;"></i>
+            <span style="margin-left: 10px; font-size: 18px; font-weight: bold;">Complete!</span>
+        </div>
+        <button id="closeAnimated" style="
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: none;
+        ">Continue</button>
+    `;
+    
+    overlay.appendChild(container);
+    document.body.appendChild(overlay);
+    
+    // Animate steps
+    setTimeout(() => {
+        document.getElementById('step1').style.opacity = '1';
+        document.getElementById('step1').style.transform = 'translateX(0)';
+        document.getElementById('step1').querySelector('.fa-check-circle').style.color = '#28a745';
+    }, 500);
+    
+    setTimeout(() => {
+        document.getElementById('step2').style.opacity = '1';
+        document.getElementById('step2').style.transform = 'translateX(0)';
+    }, 1200);
+    
+    setTimeout(() => {
+        document.getElementById('step2').querySelector('.fa-cog').classList.remove('fa-spin');
+        document.getElementById('step2').querySelector('.fa-cog').className = 'fas fa-check-circle';
+        document.getElementById('step2').querySelector('.fa-check-circle').style.color = '#28a745';
+    }, 2000);
+    
+    setTimeout(() => {
+        document.getElementById('step3').style.opacity = '1';
+        document.getElementById('step3').style.transform = 'translateX(0)';
+    }, 2200);
+    
+    setTimeout(() => {
+        document.getElementById('step3').querySelector('.fa-database').className = 'fas fa-check-circle';
+        document.getElementById('step3').querySelector('.fa-check-circle').style.color = '#28a745';
+    }, 3000);
+    
+    setTimeout(() => {
+        document.getElementById('step4').style.opacity = '1';
+        document.getElementById('step4').style.transform = 'translateX(0)';
+        
+        // Trigger confetti
+        confetti();
+        
+        // Show continue button
+        document.getElementById('closeAnimated').style.display = 'inline-block';
+    }, 3500);
+    
+    // Close button handler
+    document.getElementById('closeAnimated').addEventListener('click', function() {
+        overlay.remove();
+        
+        // Show form result
+        const resultDiv = document.getElementById('formResult');
+        const dataDiv = document.getElementById('submittedData');
+        
+        let dataHtml = '<h4>Submitted Information:</h4><ul>';
+        
+        for (let key in data) {
+            if (key === 'formSource' || key === 'submitAction') continue;
+            
+            let displayKey = key.charAt(0).toUpperCase() + key.slice(1);
+            displayKey = displayKey.replace(/([A-Z])/g, ' $1').trim();
+            
+            const value = Array.isArray(data[key]) ? data[key].join(', ') : data[key];
+            dataHtml += `<li><strong>${displayKey}:</strong> ${value}</li>`;
+        }
+        
+        dataHtml += '</ul>';
+        dataDiv.innerHTML = dataHtml;
+        
+        resultDiv.classList.remove('hidden');
+        resultDiv.scrollIntoView({ behavior: 'smooth' });
+    });
+}

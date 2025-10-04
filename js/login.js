@@ -28,7 +28,7 @@ function handleLogin(event) {
     // Validate credentials
     if (users[username] && users[username].password === password) {
         // Successful login
-        showDashboard(users[username]);
+        showDashboard(users[username], username);
         
         // Save login state
         localStorage.setItem('isLoggedIn', 'true');
@@ -50,15 +50,34 @@ function handleLogin(event) {
 }
 
 // Show dashboard after successful login
-function showDashboard(userProfile) {
+function showDashboard(userProfile, username) {
     const loginSection = document.getElementById('loginSection');
     const dashboardSection = document.getElementById('dashboardSection');
     const welcomeMessage = document.getElementById('welcomeMessage');
+    const topbarUsername = document.getElementById('topbarUsername');
+    const memberBadge = document.querySelector('.member-badge');
     
     // Update welcome message with profession if available
     const fullName = typeof userProfile === 'string' ? userProfile : userProfile.fullName;
     const profession = (userProfile && userProfile.profession) ? ` - ${userProfile.profession}` : '';
     welcomeMessage.textContent = `Hello ${fullName}${profession}, Get Motivated!`;
+    
+    // Update topbar username
+    topbarUsername.textContent = fullName;
+    
+    // Update badge based on user role
+    const currentUsername = username || localStorage.getItem('currentUser');
+    if (currentUsername === 'admin') {
+        memberBadge.innerHTML = '<i class="fas fa-crown"></i> Admin';
+        memberBadge.style.background = 'rgba(255, 215, 0, 0.3)';
+        memberBadge.style.color = '#ffd700';
+        memberBadge.style.borderColor = 'rgba(255, 215, 0, 0.5)';
+    } else {
+        memberBadge.innerHTML = '<i class="fas fa-shield-alt"></i> Member';
+        memberBadge.style.background = 'rgba(255, 215, 0, 0.2)';
+        memberBadge.style.color = '#ffd700';
+        memberBadge.style.borderColor = 'rgba(255, 215, 0, 0.4)';
+    }
     
     // Hide login form and show dashboard
     loginSection.style.opacity = '0';
@@ -66,6 +85,9 @@ function showDashboard(userProfile) {
         loginSection.classList.add('hidden');
         dashboardSection.classList.remove('hidden');
         dashboardSection.style.opacity = '0';
+        
+        // Scroll to top of page to show dashboard topbar
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         
         setTimeout(() => {
             dashboardSection.style.opacity = '1';
@@ -155,13 +177,14 @@ function checkLoginStatus() {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const userFullName = localStorage.getItem('userFullName');
     const userProfession = localStorage.getItem('userProfession');
+    const currentUser = localStorage.getItem('currentUser');
     
     if (isLoggedIn === 'true' && userFullName) {
         const userProfile = {
             fullName: userFullName,
             profession: userProfession || ''
         };
-        showDashboard(userProfile);
+        showDashboard(userProfile, currentUser);
     }
 }
 

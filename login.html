@@ -32,8 +32,8 @@
             <!-- Login Form -->
             <div id="loginSection" class="form-container">
                 <header style="margin-bottom: 30px;">
-                    <h1><i class="fas fa-sign-in-alt"></i> Welcome Back!</h1>
-                    <p>Login to access your personalized motivation dashboard</p>
+                    <h1 style="color: #667eea;"><i class="fas fa-sign-in-alt"></i> Welcome Back!</h1>
+                    <p style="color: #667eea;">Login to access your personalized motivation dashboard</p>
                 </header>
 
                 <div class="quote-container">
@@ -54,9 +54,9 @@
                         <small>Demo password for all users: password123</small>
                     </div>
 
-                    <div class="form-group">
-                        <input type="checkbox" id="remember" name="remember">
-                        <label for="remember">Remember me</label>
+                    <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" id="remember" name="remember" style="margin: 0; width: auto;">
+                        <label for="remember" style="margin: 0; cursor: pointer;">Remember me</label>
                     </div>
 
                     <div class="form-group">
@@ -73,15 +73,28 @@
 
             <!-- Dashboard (Hidden initially) -->
             <div id="dashboardSection" class="dashboard hidden">
+                <!-- Dashboard Top Bar with User Info and Logout -->
+                <div class="dashboard-topbar">
+                    <div class="user-info">
+                        <i class="fas fa-user-circle" style="font-size: 24px; margin-right: 10px;"></i>
+                        <span id="topbarUsername">User</span>
+                        <span class="member-badge"><i class="fas fa-shield-alt"></i> Member</span>
+                    </div>
+                    <button onclick="logout()" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+
                 <header>
-                    <h1 id="welcomeMessage">Hello User, Get Motivated!</h1>
-                    <p>Your personal motivation center</p>
+                    <h1 id="welcomeMessage" style="color: #667eea;"><i class="fas fa-user-circle"></i> Hello User, Get Motivated!</h1>
+                    <p style="color: #667eea; font-weight: 600; font-size: 1.3rem;">
+                        <i class="fas fa-lock"></i> Your personal motivation center
+                    </p>
                 </header>
 
-                <div class="daily-quote-dashboard">
-                    <h3><i class="fas fa-quote-left"></i> Your Daily Motivation</h3>
-                    <div id="dailyQuoteText" class="tab-quote"></div>
-                    <div id="dailyQuoteAuthor" class="tab-author"></div>
+                <div class="quote-container">
+                    <blockquote id="dailyQuoteText">"The login to success is preparation, hard work, and learning from failure."</blockquote>
+                    <cite id="dailyQuoteAuthor">- Colin Powell</cite>
                     <button onclick="getNewDailyQuote()" class="quote-btn" style="margin-top: 15px;">
                         <i class="fas fa-refresh"></i> New Quote
                     </button>
@@ -109,7 +122,9 @@
                 </div>
 
                 <div class="motivation-section">
-                    <h2>Your Motivation Feed</h2>
+                    <h2 style="color: #667eea; text-align: center; margin-bottom: 25px;">
+                        <i class="fas fa-bolt"></i> Your Motivation Feed
+                    </h2>
                     <div class="motivation-cards">
                         <div class="motivation-card">
                             <p>"Believe you can and you're halfway there."</p>
@@ -120,12 +135,6 @@
                             <span>- Winston Churchill</span>
                         </div>
                     </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button onclick="logout()" class="btn" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
-                        <i class="fas fa-sign-out-alt"></i> Logout
-                    </button>
                 </div>
             </div>
         </main>
