@@ -133,10 +133,28 @@ const autoFillData = {
     }
 };
 
+// Track auto-fill click count
+let autoFillClickCount = 0;
+
 // Auto Fill Form Function
 function autoFillForm() {
-    // Get random index (now 0-11 for 12 profiles)
-    const randomIndex = Math.floor(Math.random() * 12);
+    let randomIndex;
+    
+    // First click: Show Mohammed Amin (index 10)
+    if (autoFillClickCount === 0) {
+        randomIndex = 10; // Mohammed Amin
+    } 
+    // Second click: Show Mohammed Shahab (index 11)
+    else if (autoFillClickCount === 1) {
+        randomIndex = 11; // Mohammed Shahab
+    } 
+    // Subsequent clicks: Random from all 12 profiles
+    else {
+        randomIndex = Math.floor(Math.random() * 12);
+    }
+    
+    // Increment click count
+    autoFillClickCount++;
     
     // Fill basic fields
     document.getElementById('fullName').value = autoFillData.names[randomIndex];
