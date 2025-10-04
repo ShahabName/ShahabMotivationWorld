@@ -65,7 +65,8 @@
                     <!-- Password Input -->
                     <div class="form-group">
                         <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" placeholder="Enter password" required>
+                        <input type="password" id="password" name="password" placeholder="Enter password" required minlength="8" aria-describedby="passwordError">
+                        <small id="passwordError" class="hidden" style="color: #dc3545; margin-top: 5px;">Password must be at least 8 characters.</small>
                     </div>
 
                     <!-- Number Input -->

@@ -292,7 +292,26 @@ function updateMotivationValue(value) {
 // Handle form submission
 function handleSubmit(event) {
     event.preventDefault();
-    
+
+    // Password length validation: must be greater than 8 characters
+    const passwordInput = document.getElementById('password');
+    const passwordError = document.getElementById('passwordError');
+    if (passwordInput) {
+        // require at least 8 characters (i.e., length > 7)
+        if (passwordInput.value.length <= 7) {
+            // show inline error message if present, otherwise alert
+            if (passwordError) {
+                passwordError.classList.remove('hidden');
+            } else {
+                alert('Password must be at least 9 characters long.');
+            }
+            passwordInput.focus();
+            return; // stop submission
+        } else {
+            if (passwordError) passwordError.classList.add('hidden');
+        }
+    }
+
     const formData = new FormData(event.target);
     const data = {};
     
@@ -1120,3 +1139,22 @@ function showAnimatedSuccess(data) {
         resultDiv.scrollIntoView({ behavior: 'smooth' });
     });
 }
+
+// Add live input listener to hide/show password error while the user types
+document.addEventListener('DOMContentLoaded', function() {
+    const pwd = document.getElementById('password');
+    const pwdErr = document.getElementById('passwordError');
+    if (pwd) {
+        pwd.addEventListener('input', function() {
+            if (!pwdErr) return;
+            // hide error when length is at least 8 (>=8), otherwise show while typing
+            if (this.value.length >= 8) {
+                pwdErr.classList.add('hidden');
+            } else if (this.value.length > 0) {
+                pwdErr.classList.remove('hidden');
+            } else {
+                pwdErr.classList.add('hidden');
+            }
+        });
+    }
+});
