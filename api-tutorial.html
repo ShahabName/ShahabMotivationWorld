@@ -459,8 +459,7 @@ Scenario: Verify API is operational
 
                     <h4><i class="fas fa-terminal"></i> cURL</h4>
                     <div class="code-block">
-<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/status" \
-  -H "Accept: application/json"</code>
+<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/status" -H "Accept: application/json"</code>
                     </div>
 
                     <h3>📥 Response</h3>
@@ -573,8 +572,7 @@ Scenario: Get auth token for subsequent requests
 
                     <h4><i class="fas fa-terminal"></i> cURL</h4>
                     <div class="code-block">
-<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/token" \
-  -H "Accept: application/json"</code>
+<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/token" -H "Accept: application/json"</code>
                     </div>
 
                     <h3>📥 Response</h3>
@@ -732,13 +730,7 @@ Scenario: Successful user login with valid credentials
 TOKEN=$(curl -s "https://shahabname.github.io/ShahabMotivationWorld/api/token" | jq -r '.data.token')
 
 # Then login
-curl -X POST "https://shahabname.github.io/ShahabMotivationWorld/api/login" \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "demo_user",
-    "password": "password123"
-  }'</code>
+curl -X POST "https://shahabname.github.io/ShahabMotivationWorld/api/login" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"username": "demo_user", "password": "password123"}'</code>
                     </div>
 
                     <h3>📥 Response</h3>
@@ -858,8 +850,7 @@ Scenario: Retrieve all motivational quotes
 
                     <h4><i class="fas fa-terminal"></i> cURL</h4>
                     <div class="code-block">
-<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/quotes" \
-  -H "Accept: application/json"</code>
+<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/quotes" -H "Accept: application/json"</code>
                     </div>
 
                     <h3>📥 Response</h3>
@@ -1023,8 +1014,7 @@ Scenario: Verify randomness - call multiple times
 
                     <h4><i class="fas fa-terminal"></i> cURL</h4>
                     <div class="code-block">
-<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/getrandomquote" \
-  -H "Accept: application/json"</code>
+<code>curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/getrandomquote" -H "Accept: application/json"</code>
                     </div>
 
                     <h3>📥 Response</h3>
