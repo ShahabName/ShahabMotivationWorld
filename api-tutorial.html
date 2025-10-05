@@ -356,7 +356,7 @@
 
                     <div class="info-box">
                         <p><strong><i class="fas fa-info-circle"></i> Base URL:</strong></p>
-                        <code style="font-size: 16px;">https://shahabname.github.io/ShahabMotivationWorld/api</code>
+                        <code style="font-size: 16px;">https://shahabname.github.io</code>
                     </div>
                 </div>
 
@@ -375,31 +375,31 @@
                         <tbody>
                             <tr>
                                 <td><span class="endpoint-badge get-badge">GET</span></td>
-                                <td><code>/status</code></td>
+                                <td><code>ShahabMotivationWorld/api/status</code></td>
                                 <td>Check API operational status</td>
                                 <td>No</td>
                             </tr>
                             <tr>
                                 <td><span class="endpoint-badge get-badge">GET</span></td>
-                                <td><code>/token</code></td>
+                                <td><code>ShahabMotivationWorld/api/token</code></td>
                                 <td>Generate authentication token</td>
                                 <td>No</td>
                             </tr>
                             <tr>
-                                <td><span class="endpoint-badge post-badge">POST</span></td>
-                                <td><code>/login</code></td>
-                                <td>User login with credentials</td>
+                                <td><span class="endpoint-badge post-badge">GET</span></td>
+                                <td><code>ShahabMotivationWorld/api/login</code></td>
+                                <td>User login with credentials. Use GET method. POST Method will give 405 error</td>
                                 <td>Yes (Auth Token)</td>
                             </tr>
                             <tr>
                                 <td><span class="endpoint-badge get-badge">GET</span></td>
-                                <td><code>/quotes</code></td>
+                                <td><code>ShahabMotivationWorld/api/quotes</code></td>
                                 <td>Retrieve all motivational quotes</td>
                                 <td>No</td>
                             </tr>
                             <tr>
                                 <td><span class="endpoint-badge get-badge">GET</span></td>
-                                <td><code>/getrandomquote</code></td>
+                                <td><code>ShahabMotivationWorld/api/getrandomquote</code></td>
                                 <td>Get a random quote</td>
                                 <td>No</td>
                             </tr>
@@ -438,10 +438,10 @@
 const { request } = require('@playwright/test');
 
 const apiContext = await request.newContext({
-    baseURL: 'https://shahabname.github.io/ShahabMotivationWorld'
+    baseURL: 'https://shahabname.github.io'
 });
 
-const response = await apiContext.get('/api/status');
+const response = await apiContext.get('/ShahabMotivationWorld/api/status');
 const data = await response.json();
 
 console.log('Status:', response.status());
@@ -458,11 +458,11 @@ import static org.hamcrest.Matchers.*;
 public class ApiStatusTest {
     @Test
     public void testApiStatus() {
-        RestAssured.baseURI = "https://shahabname.github.io/ShahabMotivationWorld";
+        RestAssured.baseURI = "https://shahabname.github.io";
         
         Response response = given()
             .when()
-                .get("/api/status")
+                .get("/ShahabMotivationWorld/api/status")
             .then()
                 .statusCode(200)
                 .body("success", equalTo(true))
@@ -479,16 +479,16 @@ public class ApiStatusTest {
 <code>Feature: API Status Check
 
 Background:
-  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+  * url 'https://shahabname.github.io'
 
 Scenario: Verify API is operational
-  Given path '/api/status'
+  Given path '/ShahabMotivationWorld/api/status'
   When method get
   Then status 200
   And match response.success == true
   And match response.data.status == 'operational'
   And match response.data.service == 'ShahabMotivationWorld Mock API'
-  And match response.data.endpoints contains '/api/token'
+  And match response.data.endpoints contains '/ShahabMotivationWorld/api/token'
   And print 'API Status:', response</code>
                     </div>
 
@@ -508,11 +508,11 @@ Scenario: Verify API is operational
     "service": "ShahabMotivationWorld Mock API",
     "version": "1.0.0",
     "endpoints": [
-      "/api/token",
-      "/api/login",
-      "/api/getrandomquote",
-      "/api/quotes",
-      "/api/status"
+      "/ShahabMotivationWorld/api/token",
+      "/ShahabMotivationWorld/api/login",
+      "/ShahabMotivationWorld/api/getrandomquote",
+      "/ShahabMotivationWorld/api/quotes",
+      "/ShahabMotivationWorld/api/status"
     ],
     "uptime": "99.9%",
     "lastUpdated": "2025-01-29T12:00:00Z"
@@ -527,7 +527,7 @@ Scenario: Verify API is operational
                 <!-- Feature 2: Generate Token -->
                 <div id="token" class="feature-section">
                     <h2>2️⃣ Generate Authentication Token</h2>
-                    <p><span class="endpoint-badge get-badge">GET</span> <code>/api/token</code></p>
+                    <p><span class="endpoint-badge get-badge">GET</span> <code>/ShahabMotivationWorld/api/token</code></p>
                     <p>Generate a bearer token required for authenticated API requests.</p>
 
                     <h3>📡 Request Details</h3>
@@ -551,7 +551,7 @@ Scenario: Verify API is operational
 
                     <h4><i class="fas fa-code"></i> Playwright API Context</h4>
                     <div class="code-block">
-<code>const response = await apiContext.get('/api/token');
+<code>const response = await apiContext.get('/ShahabMotivationWorld/api/token');
 const data = await response.json();
 
 // Extract and store token
@@ -569,7 +569,7 @@ const headers = {
 <code>@Test
 public void testGenerateToken() {
     Response response = given()
-        .baseUri("https://shahabname.github.io/ShahabMotivationWorld")
+        .baseUri("https://shahabname.github.io")
         .when()
             .get("/api/token")
         .then()
@@ -590,7 +590,7 @@ public void testGenerateToken() {
 <code>Feature: Generate Authentication Token
 
 Background:
-  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+  * url 'https://shahabname.github.io'
 
 Scenario: Get auth token for subsequent requests
   Given path '/api/token'
@@ -635,12 +635,12 @@ Scenario: Get auth token for subsequent requests
                 <!-- Feature 3: User Login -->
                 <div id="login" class="feature-section">
                     <h2>3️⃣ User Login</h2>
-                    <p><span class="endpoint-badge post-badge">POST</span> <code>/api/login</code></p>
+                    <p><span class="endpoint-badge post-badge">POST</span> <code>/ShahabMotivationWorld/api/login</code></p>
                     <p>Authenticate user with credentials and receive a session token.</p>
 
-                    <h3>📡 Request Details</h3>
+                    <h3>📡 Request Details (POST is not supported in Mock API, send GET Request</h3>
                     <ul>
-                        <li><strong>Method:</strong> POST</li>
+                        <li><strong>Method:</strong> GET</li>
                         <li><strong>URL:</strong> https://shahabname.github.io/ShahabMotivationWorld/api/login</li>
                         <li><strong>Headers:</strong> 
                             <ul>
@@ -649,6 +649,7 @@ Scenario: Get auth token for subsequent requests
                             </ul>
                         </li>
                         <li><strong>Body:</strong> JSON with username and password</li>
+                        <li><strong>Negative Test Cases:</strong> Use Incorrect Token and/or Invalid Credentials</li>
                     </ul>
 
                     <h3>Request Body Schema</h3>
@@ -663,7 +664,7 @@ Scenario: Get auth token for subsequent requests
 
                     <h4><i class="fas fa-paper-plane"></i> Postman</h4>
                     <div class="code-block">
-<code>1. Create new POST request
+<code>1. Create new GET request (not POST, as POST gives 405 error)
 2. URL: https://shahabname.github.io/ShahabMotivationWorld/api/login
 3. Headers:
    - Authorization: Bearer {{authToken}}
@@ -679,11 +680,11 @@ Scenario: Get auth token for subsequent requests
                     <h4><i class="fas fa-code"></i> Playwright API Context</h4>
                     <div class="code-block">
 <code>// First get auth token
-const tokenResponse = await apiContext.get('/api/token');
+const tokenResponse = await apiContext.get('/ShahabMotivationWorld/api/token');
 const authToken = (await tokenResponse.json()).data.token;
 
 // Then perform login
-const loginResponse = await apiContext.post('/api/login', {
+const loginResponse = await apiContext.get('/ShahabMotivationWorld/api/login', {
     headers: {
         'Authorization': `Bearer ${authToken}`,
         'Content-Type': 'application/json'
@@ -713,12 +714,12 @@ public void testUserLogin() {
     
     // Perform login
     Response response = given()
-        .baseUri("https://shahabname.github.io/ShahabMotivationWorld")
+        .baseUri("https://shahabname.github.io")
         .header("Authorization", "Bearer " + authToken)
         .contentType("application/json")
         .body(credentials)
         .when()
-            .post("/api/login")
+            .get("/ShahabMotivationWorld/api/login")
         .then()
             .statusCode(200)
             .body("success", equalTo(true))
@@ -735,20 +736,20 @@ public void testUserLogin() {
 <code>Feature: User Login Flow
 
 Background:
-  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+  * url 'https://shahabname.github.io'
 
 Scenario: Successful user login with valid credentials
   # Step 1: Get authentication token
-  Given path '/api/token'
+  Given path '/ShahabMotivationWorld/api/token'
   When method get
   Then status 200
   * def authToken = response.data.token
   
   # Step 2: Login with credentials
-  Given path '/api/login'
+  Given path '/ShahabMotivationWorld/api/login'
   And header Authorization = 'Bearer ' + authToken
   And request { username: 'demo_user', password: 'password123' }
-  When method post
+  When method get
   Then status 200
   And match response.success == true
   And match response.data.user.username == 'demo_user'
@@ -762,10 +763,10 @@ Scenario: Successful user login with valid credentials
                     <h4><i class="fas fa-terminal"></i> cURL</h4>
                     <div class="code-block">
 <code># First get the token
-TOKEN=$(curl -s "https://shahabname.github.io/ShahabMotivationWorld/api/token" | jq -r '.data.token')
+TOKEN=$(curl -s "https://shahabname.github.io/ShahabMotivationWorld/api/token")
 
 # Then login
-curl -X POST "https://shahabname.github.io/ShahabMotivationWorld/api/login" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"username": "demo_user", "password": "password123"}'</code>
+curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/login" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"username": "demo_user", "password": "password123"}'</code>
                     </div>
 
                     <h3>📥 Response</h3>
@@ -802,7 +803,7 @@ curl -X POST "https://shahabname.github.io/ShahabMotivationWorld/api/login" -H "
                 <!-- Feature 4: Get All Quotes -->
                 <div id="quotes" class="feature-section">
                     <h2>4️⃣ Get All Quotes</h2>
-                    <p><span class="endpoint-badge get-badge">GET</span> <code>/api/quotes</code></p>
+                    <p><span class="endpoint-badge get-badge">GET</span> <code>/ShahabMotivationWorld/api/quotes</code></p>
                     <p>Retrieve all motivational quotes from the database.</p>
 
                     <h3>📡 Request Details</h3>
@@ -825,7 +826,7 @@ curl -X POST "https://shahabname.github.io/ShahabMotivationWorld/api/login" -H "
 
                     <h4><i class="fas fa-code"></i> Playwright API Context</h4>
                     <div class="code-block">
-<code>const response = await apiContext.get('/api/quotes');
+<code>const response = await apiContext.get('/ShahabMotivationWorld/api/quotes');
 const data = await response.json();
 
 console.log('Total Quotes:', data.data.pagination.total);
@@ -842,9 +843,9 @@ data.data.quotes.forEach(quote => {
 <code>@Test
 public void testGetAllQuotes() {
     Response response = given()
-        .baseUri("https://shahabname.github.io/ShahabMotivationWorld")
+        .baseUri("https://shahabname.github.io")
         .when()
-            .get("/api/quotes")
+            .get("/ShahabMotivationWorld/api/quotes")
         .then()
             .statusCode(200)
             .body("success", equalTo(true))
@@ -866,7 +867,7 @@ public void testGetAllQuotes() {
 <code>Feature: Get All Quotes
 
 Background:
-  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+  * url 'https://shahabname.github.io'
 
 Scenario: Retrieve all motivational quotes
   Given path '/api/quotes'
@@ -929,7 +930,7 @@ Scenario: Retrieve all motivational quotes
                 <!-- Feature 5: Get Random Quote -->
                 <div id="randomquote" class="feature-section">
                     <h2>5️⃣ Get Random Quote</h2>
-                    <p><span class="endpoint-badge get-badge">GET</span> <code>/api/getrandomquote</code></p>
+                    <p><span class="endpoint-badge get-badge">GET</span> <code>/ShahabMotivationWorld/api/getrandomquote</code></p>
                     <p>Retrieve a single random motivational quote.</p>
 
                     <h3>📡 Request Details</h3>
@@ -953,7 +954,7 @@ Scenario: Retrieve all motivational quotes
                     <h4><i class="fas fa-code"></i> Playwright API Context</h4>
                     <div class="code-block">
 <code>// Get a random quote
-const response = await apiContext.get('/api/getrandomquote');
+const response = await apiContext.get('/ShahabMotivationWorld/api/getrandomquote');
 const data = await response.json();
 
 console.log('Random Quote:', data.data.text);
@@ -973,9 +974,9 @@ for (let i = 0; i < 3; i++) {
 <code>@Test
 public void testGetRandomQuote() {
     Response response = given()
-        .baseUri("https://shahabname.github.io/ShahabMotivationWorld")
+        .baseUri("https://shahabname.github.io")
         .when()
-            .get("/api/getrandomquote")
+            .get("/ShahabMotivationWorld/api/getrandomquote")
         .then()
             .statusCode(200)
             .body("success", equalTo(true))
@@ -998,9 +999,9 @@ public void testMultipleRandomQuotes() {
     
     for (int i = 0; i < 5; i++) {
         Response response = given()
-            .baseUri("https://shahabname.github.io/ShahabMotivationWorld")
-            .get("/api/getrandomquote");
-        
+            .baseUri("https://shahabname.github.io")
+            .get("/ShahabMotivationWorld/api/getrandomquote");
+
         String quoteId = response.jsonPath().getString("data.id");
         quoteIds.add(quoteId);
     }
@@ -1014,10 +1015,10 @@ public void testMultipleRandomQuotes() {
 <code>Feature: Get Random Quote
 
 Background:
-  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+  * url 'https://shahabname.github.io'
 
 Scenario: Get a random motivational quote
-  Given path '/api/getrandomquote'
+  Given path '/ShahabMotivationWorld/api/getrandomquote'
   When method get
   Then status 200
   And match response.success == true
@@ -1090,21 +1091,21 @@ Scenario: Verify randomness - call multiple times
 
                     <h3><i class="fas fa-code"></i> Complete Playwright Example</h3>
                     <div class="code-block">
-<code>import { test, expect } from '@playwright/test';
+<code>import { test, expect, request, APIRequestContext } from '@playwright/test';
 
 test.describe('Complete API Authentication Flow', () => {
-    let apiContext;
-    let authToken;
-    let sessionToken;
+    let apiContext: APIRequestContext;
+    let authToken: string;
+    let sessionToken: string;
 
     test.beforeAll(async ({ playwright }) => {
         apiContext = await playwright.request.newContext({
-            baseURL: 'https://shahabname.github.io/ShahabMotivationWorld'
+            baseURL: 'https://shahabname.github.io'
         });
     });
 
     test('Step 1: Check API Status', async () => {
-        const response = await apiContext.get('/api/status');
+        const response = await apiContext.get('/ShahabMotivationWorld/api/status');
         expect(response.status()).toBe(200);
         
         const data = await response.json();
@@ -1114,7 +1115,7 @@ test.describe('Complete API Authentication Flow', () => {
     });
 
     test('Step 2: Generate Auth Token', async () => {
-        const response = await apiContext.get('/api/token');
+        const response = await apiContext.get('/ShahabMotivationWorld/api/token');
         expect(response.status()).toBe(200);
         
         const data = await response.json();
@@ -1124,7 +1125,7 @@ test.describe('Complete API Authentication Flow', () => {
     });
 
     test('Step 3: Login with Credentials', async () => {
-        const response = await apiContext.post('/api/login', {
+        const response = await apiContext.get('/ShahabMotivationWorld/api/login', {
             headers: {
                 'Authorization': `Bearer ${authToken}`,
                 'Content-Type': 'application/json'
@@ -1143,7 +1144,7 @@ test.describe('Complete API Authentication Flow', () => {
     });
 
     test('Step 4: Access Protected Resource', async () => {
-        const response = await apiContext.get('/api/quotes', {
+        const response = await apiContext.get('/ShahabMotivationWorld/api/quotes', {
             headers: {
                 'Authorization': `Bearer ${sessionToken}`
             }
@@ -1156,7 +1157,7 @@ test.describe('Complete API Authentication Flow', () => {
     });
 
     test('Step 5: Get Random Quote', async () => {
-        const response = await apiContext.get('/api/getrandomquote');
+        const response = await apiContext.get('/ShahabMotivationWorld/api/getrandomquote');
         expect(response.status()).toBe(200);
         
         const data = await response.json();
@@ -1175,19 +1176,19 @@ test.describe('Complete API Authentication Flow', () => {
 <code>Feature: Complete API Authentication Workflow
 
 Background:
-  * url 'https://shahabname.github.io/ShahabMotivationWorld'
+  * url 'https://shahabname.github.io'
   * configure headers = { 'Accept': 'application/json' }
 
 Scenario: End-to-end API testing workflow
   # Step 1: Verify API is operational
-  Given path '/api/status'
+  Given path '/ShahabMotivationWorld/api/status'
   When method get
   Then status 200
   And match response.data.status == 'operational'
   * print '✓ API is operational'
   
   # Step 2: Generate authentication token
-  Given path '/api/token'
+  Given path '/ShahabMotivationWorld/api/token'
   When method get
   Then status 200
   And match response.data.token == '#string'
@@ -1195,17 +1196,17 @@ Scenario: End-to-end API testing workflow
   * print '✓ Auth token generated'
   
   # Step 3: Login with credentials
-  Given path '/api/login'
+  Given path '/ShahabMotivationWorld/api/login'
   And header Authorization = 'Bearer ' + authToken
   And request { username: 'demo_user', password: 'password123' }
-  When method post
+  When method get
   Then status 200
   And match response.data.sessionToken == '#string'
   * def sessionToken = response.data.sessionToken
   * print '✓ Login successful'
   
   # Step 4: Get all quotes
-  Given path '/api/quotes'
+  Given path '/ShahabMotivationWorld/api/quotes'
   When method get
   Then status 200
   And match response.data.quotes == '#[]'
@@ -1213,7 +1214,7 @@ Scenario: End-to-end API testing workflow
   * print '✓ Retrieved', quoteCount, 'quotes'
   
   # Step 5: Get random quote
-  Given path '/api/getrandomquote'
+  Given path '/ShahabMotivationWorld/api/getrandomquote'
   When method get
   Then status 200
   And match response.data.text == '#string'
@@ -1225,7 +1226,7 @@ Scenario: End-to-end API testing workflow
                     <div class="code-block">
 <code>public class CompleteApiWorkflowTest {
     
-    private static final String BASE_URI = "https://shahabname.github.io/ShahabMotivationWorld";
+    private static final String BASE_URI = "https://shahabname.github.io";
     private String authToken;
     private String sessionToken;
     
@@ -1234,7 +1235,7 @@ Scenario: End-to-end API testing workflow
         given()
             .baseUri(BASE_URI)
         .when()
-            .get("/api/status")
+            .get("/ShahabMotivationWorld/api/status")
         .then()
             .statusCode(200)
             .body("data.status", equalTo("operational"));
@@ -1269,7 +1270,7 @@ Scenario: End-to-end API testing workflow
             .contentType("application/json")
             .body(credentials)
         .when()
-            .post("/api/login")
+            .get("/ShahabMotivationWorld/api/login")
         .then()
             .statusCode(200)
             .extract().response();
@@ -1285,7 +1286,7 @@ Scenario: End-to-end API testing workflow
             .baseUri(BASE_URI)
             .header("Authorization", "Bearer " + sessionToken)
         .when()
-            .get("/api/quotes")
+            .get("/ShahabMotivationWorld/api/quotes")
         .then()
             .statusCode(200)
             .extract().response();
@@ -1299,7 +1300,7 @@ Scenario: End-to-end API testing workflow
         Response response = given()
             .baseUri(BASE_URI)
         .when()
-            .get("/api/getrandomquote")
+            .get("/ShahabMotivationWorld/api/getrandomquote")
         .then()
             .statusCode(200)
             .extract().response();
@@ -1330,7 +1331,7 @@ Scenario: End-to-end API testing workflow
 2. Create a new Collection: "ShahabMotivationWorld API"
 
 3. Add environment variables:
-   - baseUrl: https://shahabname.github.io/ShahabMotivationWorld
+   - baseUrl: https://shahabname.github.io
    - authToken: (will be set dynamically)
    - sessionToken: (will be set dynamically)
 
