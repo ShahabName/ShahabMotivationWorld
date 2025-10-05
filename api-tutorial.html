@@ -648,8 +648,7 @@ Scenario: Get auth token for subsequent requests
                                 <li><code>Content-Type: application/json</code></li>
                             </ul>
                         </li>
-                        <li><strong>Body:</strong> JSON with username and password</li>
-                        <li><strong>Negative Test Cases:</strong> Use Incorrect Token and/or Invalid Credentials</li>
+                        <li><strong>Body:</strong> JSON with username and password (Mock Data)</li>
                     </ul>
 
                     <h3>Request Body Schema</h3>
@@ -763,10 +762,12 @@ Scenario: Successful user login with valid credentials
                     <h4><i class="fas fa-terminal"></i> cURL</h4>
                     <div class="code-block">
 <code># First get the token
-TOKEN=$(curl -s "https://shahabname.github.io/ShahabMotivationWorld/api/token")
+curl -s "https://shahabname.github.io/ShahabMotivationWorld/api/token"
+
+# Note down the Token received and send it in the Authorization header in next request
 
 # Then login
-curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/login" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{"username": "demo_user", "password": "password123"}'</code>
+curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/login" -H "Authorization: Bearer <Token>" -H "Content-Type: application/json" -d '{"username": "demo_user", "password": "password123"}'</code>
                     </div>
 
                     <h3>📥 Response</h3>
