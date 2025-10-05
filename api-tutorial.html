@@ -395,7 +395,7 @@
                                 <td><span class="endpoint-badge get-badge">GET</span></td>
                                 <td><code>ShahabMotivationWorld/api/quotes</code></td>
                                 <td>Retrieve all motivational quotes</td>
-                                <td>No</td>
+                                <td>Yes (Session Token)</td>
                             </tr>
                             <tr>
                                 <td><span class="endpoint-badge get-badge">GET</span></td>
@@ -635,7 +635,7 @@ Scenario: Get auth token for subsequent requests
                 <!-- Feature 3: User Login -->
                 <div id="login" class="feature-section">
                     <h2>3️⃣ User Login</h2>
-                    <p><span class="endpoint-badge post-badge">POST</span> <code>/ShahabMotivationWorld/api/login</code></p>
+                    <p><span class="endpoint-badge post-badge">GET</span> <code>/ShahabMotivationWorld/api/login</code></p>
                     <p>Authenticate user with credentials and receive a session token.</p>
 
                     <h3>📡 Request Details (POST is not supported in Mock API, send GET Request</h3>
@@ -810,7 +810,9 @@ curl -X GET "https://shahabname.github.io/ShahabMotivationWorld/api/login" -H "A
                     <ul>
                         <li><strong>Method:</strong> GET</li>
                         <li><strong>URL:</strong> https://shahabname.github.io/ShahabMotivationWorld/api/quotes</li>
-                        <li><strong>Headers:</strong> None required</li>
+                        <li><strong>Headers:</strong> headers: {
+                'Authorization': `Bearer ${sessionToken}`
+            }</li>
                         <li><strong>Body:</strong> None</li>
                     </ul>
 
