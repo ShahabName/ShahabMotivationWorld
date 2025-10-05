@@ -14,9 +14,9 @@
 
     // Language configuration
     const languages = [
-        { code: 'en', name: 'English', flag: '🇬🇧' },
+        { code: 'en', name: 'English', flag: '🇺🇸' },
         { code: 'hi', name: 'Hindi', flag: '🇮🇳' },
-        { code: 'ur', name: 'Urdu', flag: '🇵🇰' },
+        { code: 'ur', name: 'Urdu', flag: '🇮🇳' },
         { code: 'ar', name: 'Arabic', flag: '🇸🇦' },
         { code: 'zh-CN', name: 'Chinese', flag: '🇨🇳' },
         { code: 'zh-CN', name: 'Mandarin', flag: '🇨🇳', display: false }, // Same as Chinese, don't display separately
