@@ -538,7 +538,7 @@
             updateOutput('authOutput', 'Attempting login...');
 
             const { response, data, error } = await apiRequest('/auth/login', {
-                method: 'POST',
+                method: 'GET',
                 body: JSON.stringify({ username, password })
             });
 
@@ -789,7 +789,10 @@
             <h3 style="color: #495057; margin-top: 30px; font-size: 1.5rem; border-bottom: 2px solid #dee2e6; padding-bottom: 10px;">🔐 Complete Authentication Flow:</h3>
             <ol style="line-height: 2; color: #333; font-size: 15px; padding-left: 25px;">
                 <li style="margin-bottom: 15px;">
-                    <strong>Get Authentication Token:</strong> Click "Generate Auth Token" or call <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; color: #e83e8c;">GET /api/token</code> to receive a bearer token. This token is required for all subsequent authenticated requests.
+                    <strong>Set API Base URL:</strong> <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; color: #e83e8c;">https://shahabname.github.io/</code>
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <strong>Get Authentication Token:</strong> Click "Generate Auth Token" or call <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; color: #e83e8c;">GET /ShahabMotivationWorld/api/token</code> to receive a bearer token. This token is required for all subsequent authenticated requests.
                 </li>
                 
                 <li style="margin-bottom: 15px;">
@@ -797,7 +800,7 @@
                 </li>
                 
                 <li style="margin-bottom: 15px;">
-                    <strong>Login with Token:</strong> Use the token in the Authorization header when calling <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; color: #e83e8c;">POST /api/login</code>. Include user credentials in the request body (username/password).
+                    <strong>Login with Token:</strong> Use the token in the Authorization header when calling <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; color: #e83e8c;">GET /ShahabMotivationWorld/api/login</code>. Include user credentials in the request body (username/password).
                 </li>
                 
                 <li style="margin-bottom: 15px;">
@@ -819,18 +822,18 @@
             <div style="background-color: #fff; padding: 20px; border-radius: 8px; margin-top: 15px; border: 1px solid #dee2e6;">
                 <p style="margin: 0 0 15px 0; color: #333; font-weight: bold; font-size: 16px;">Playwright Example:</p>
                 <pre style="background-color: #282c34; color: #abb2bf; padding: 15px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.5;">// Get token
-const tokenResponse = await page.request.get('/api/token');
+const tokenResponse = await page.request.get('/ShahabMotivationWorld/api/token');
 const token = (await tokenResponse.json()).data.token;
 
-// Login with token
-const loginResponse = await page.request.post('/api/login', {
+// Login with token, Use GET method for login, Using POST method will result in 405 error as this is a mock API
+const loginResponse = await page.request.get('/ShahabMotivationWorld/api/login', {
     headers: { 'Authorization': `Bearer ${token}` },
     data: { username: 'demo_user', password: 'password123' }
 });
 
 // Access protected endpoint
 const sessionToken = (await loginResponse.json()).data.sessionToken;
-const quotesResponse = await page.request.get('/api/quotes', {
+const quotesResponse = await page.request.get('/ShahabMotivationWorld/api/quotes', {
     headers: { 'Authorization': `Bearer ${sessionToken}` }
 });</pre>
 
@@ -839,7 +842,7 @@ const quotesResponse = await page.request.get('/api/quotes', {
 curl https://shahabname.github.io/ShahabMotivationWorld/api/token
 
 # Step 2: Login (replace YOUR_TOKEN with actual token)
-curl -X POST https://shahabname.github.io/ShahabMotivationWorld/api/login \
+curl -X GET https://shahabname.github.io/ShahabMotivationWorld/api/login \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"username":"demo_user","password":"password123"}'
@@ -862,7 +865,7 @@ Scenario: Complete login flow
   Given url 'https://shahabname.github.io/ShahabMotivationWorld/api/login'
   And header Authorization = 'Bearer ' + authToken
   And request { username: 'demo_user', password: 'password123' }
-  When method post
+  When method get
   Then status 200
   And def sessionToken = response.data.sessionToken
   
@@ -896,27 +899,27 @@ Scenario: Complete login flow
                     <tbody>
                         <tr>
                             <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; color: #0066cc;">GET</code></td>
-                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/api/token</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/ShahabMotivationWorld/api/token</code></td>
                             <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Generate authentication token</td>
                         </tr>
                         <tr>
-                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #fff3cd; padding: 3px 8px; border-radius: 3px; color: #856404;">POST</code></td>
-                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/api/login</code></td>
-                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Login with credentials (requires auth token)</td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #fff3cd; padding: 3px 8px; border-radius: 3px; color: #856404;">GET</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/ShahabMotivationWorld/api/login</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Login with credentials (requires auth token and is a GET request)</td>
                         </tr>
                         <tr>
                             <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; color: #0066cc;">GET</code></td>
-                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/api/quotes</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/ShahabMotivationWorld/api/quotes</code></td>
                             <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Retrieve all quotes</td>
                         </tr>
                         <tr>
                             <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; color: #0066cc;">GET</code></td>
-                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/api/getrandomquote</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/ShahabMotivationWorld/api/getrandomquote</code></td>
                             <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Get a random motivational quote</td>
                         </tr>
                         <tr>
                             <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code style="background-color: #e7f3ff; padding: 3px 8px; border-radius: 3px; color: #0066cc;">GET</code></td>
-                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/api/status</code></td>
+                            <td style="padding: 10px; border-bottom: 1px solid #dee2e6;"><code>/ShahabMotivationWorld/api/status</code></td>
                             <td style="padding: 10px; border-bottom: 1px solid #dee2e6;">Check API operational status</td>
                         </tr>
                     </tbody>
