@@ -3,7 +3,7 @@
 **Welcome to Shahab's World of Motivations!** - A multi-page GitHub Pages website dedicated to inspiration, motivation, and positivity.
 
 ## 🎯 Live Website
-Visit the live website at: `https://yourusername.github.io/ShahabMotivationWorld`
+Visit the live website at: `https://ShahabName.github.io/ShahabMotivationWorld`
 
 ## 📋 Features
 
@@ -52,7 +52,11 @@ For testing the login functionality:
 - **Username**: `admin`, **Password**: `password123`
 - **Username**: `john`, **Password**: `password123`  
 - **Username**: `sarah`, **Password**: `password123`
-- **Username**: `alex`, **Password**: `password123`
+- **Username**: `virat`, **Password**: `password123`
+- **Username**: `sindhu`, **Password**: `password123`
+- **Username**: `mary`, **Password**: `password123`
+- **Username**: `dhoni`, **Password**: `password123`
+- **Username**: `neeraj`, **Password**: `password123`
 
 ## 🛠️ Technologies Used
 
